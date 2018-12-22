@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "139617359189",
+    "firebase_url": "https://tour-97901.firebaseio.com",
+    "project_id": "tour-97901",
+    "storage_bucket": "tour-97901.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:139617359189:android:e5a53bf2d65b046d",
+        "android_client_info": {
+          "package_name": "com.example.yogra.tourplanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "139617359189-oqgmrcb4f9pn29ps33f9omv1q38mbqv5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHtyrrAJmoo-VofGn35x30OAd5n1m_t_k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
