@@ -21,10 +21,8 @@
         </activity>
         <activity android:name=".Login.view.LoginActivity" />
         <activity android:name=".Signup.view.SignupActivity" />
-        <activity
-            android:name=".Home.HomeActivity"
-            android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Home.HomeActivity" />
+        <activity android:name=".AddTourPlaces.TourActivity"></activity>
     </application>
 
 </manifest>

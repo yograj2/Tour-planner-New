@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    tools:context=".AddTourPlaces.TourActivity"
+
+    >
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/con_tour_place"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_tour_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Place  :  "
+
+            />
+
+        <TextView
+            android:id="@+id/tv_tour_place_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AAAAAAAAAAAAAAAAAAAAAAA"
+            app:layout_constraintStart_toEndOf="@id/tv_tour_place" />
+    </android.support.constraint.ConstraintLayout>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/con_tour_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/con_tour_place">
+
+        <TextView
+            android:id="@+id/tv_tour_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description : " />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/tv_tour_description"
+            android:text="njsjnsnsjnjsn"
+            android:id="@+id/tv_tour_desc_info"
+            />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/con_tour_sightseeing"
+        app:layout_constraintTop_toBottomOf="@id/con_tour_description"
+        android:layout_marginTop="8dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_tour_sight_seeing"
+            android:text="Sight Seeing : "/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_tour_sight_info"
+            android:text="hdjhjhdjhdjdhjd"
+            app:layout_constraintStart_toEndOf="@id/tv_tour_sight_seeing"
+            />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="ADD"/>
+
+</android.support.constraint.ConstraintLayout>

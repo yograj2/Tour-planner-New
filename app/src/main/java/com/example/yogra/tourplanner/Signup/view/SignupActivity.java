@@ -17,16 +17,10 @@ import com.example.yogra.tourplanner.Home.HomeActivity;
 import com.example.yogra.tourplanner.Login.view.LoginActivity;
 import com.example.yogra.tourplanner.R;
 import com.example.yogra.tourplanner.Util.User;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.security.AlgorithmConstraints;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -39,8 +33,8 @@ public class SignupActivity extends AppCompatActivity {
     Context context;
     public TextView textView;
     public ProgressDialog progressDialog;
-   // private FirebaseAuth firebaseAuth;
     public DatabaseReference databaseReference;
+    // private FirebaseAuth firebaseAuth;
     private static final String TAG = "SignupActivity";
 
     @Override
@@ -129,7 +123,7 @@ public class SignupActivity extends AppCompatActivity {
                         user.setName(username.getText().toString());
                         user.setEmail(emailaddress.getText().toString());
                         user.setPassword(password.getText().toString());
-                        user.setConformpassword(conformpassword.getText().toString());
+                        //user.setConformpassword(conformpassword.getText().toString());
 
                         //create database
 

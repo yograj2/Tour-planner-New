@@ -62,6 +62,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:hint="Enter password"
+            android:inputType="textPassword"
             android:background="@android:color/transparent"
             android:drawableRight="@drawable/password_lock"
             android:textColorHint="#616161"
