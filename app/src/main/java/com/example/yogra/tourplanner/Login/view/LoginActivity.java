@@ -3,6 +3,7 @@ package com.example.yogra.tourplanner.Login.view;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.yogra.tourplanner.Home.HomeActivity;
 import com.example.yogra.tourplanner.R;
 import com.example.yogra.tourplanner.Signup.view.SignupActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     Intent intent;
     public DatabaseReference mdatabaseReference;
     public ProgressDialog progressDialog;
+    public FloatingActionButton floatingActionButton;
 
     //Firebase Authentication
     private FirebaseAuth firebaseAuth;
@@ -51,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         loginpassword = findViewById(R.id.login_password);
         login = findViewById(R.id.login_button);
         signup = findViewById(R.id.signup_button);
+        floatingActionButton=findViewById(R.id.Home_button_admin);
 
         //progress Dialog
         progressDialog = new ProgressDialog(this);
@@ -61,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String Email = loginemailid.getText().toString();
                 String Password = loginpassword.getText().toString();
+
                 if (Email.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Email Id should not be empty", Toast.LENGTH_SHORT).show();
                     Log.d("Login", "Successfully done");
@@ -88,6 +93,9 @@ public class LoginActivity extends AppCompatActivity {
                     mdatabaseReference = FirebaseDatabase.getInstance().getReference();
                     final String email = loginemailid.getText().toString();
                     final String password = loginpassword.getText().toString();
+                    final String adminEmail = "admin@gmail.com";
+                    final String adminPassword = "admin@1234";
+
                     DatabaseReference users = mdatabaseReference.child("users");
                     users.addListenerForSingleValueEvent(new ValueEventListener() {
                         boolean isExit = false;
@@ -95,7 +103,10 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                                if (ds.child("email").getValue().toString().equals(email) && ds.child("password").getValue().toString().equals(password)) {
+                                if (ds.child("email").getValue().toString().equals(email) && ds.child("password").getValue().toString().equals(password) ||
+                                        ds.child("email").getValue().toString().equals(adminEmail) && ds.child("password").getValue().toString().equals(adminPassword)
+                                        ) {
+                                    Log.d("Login","Added succesfullyy!!!!!!!!!!!!!!");
                                     isExit = true;
                                     break;
                                 }
@@ -104,8 +115,11 @@ public class LoginActivity extends AppCompatActivity {
                             if (isExit) {
                                 intent = new Intent(LoginActivity.this, HomeActivity.class);
                                 startActivity(intent);
+                               floatingActionButton.show();
+
                             } else {
                                 progressDialog.dismiss();
+                               floatingActionButton.hide();
                                 Toast.makeText(LoginActivity.this, "Please First Registered ", Toast.LENGTH_SHORT).show();
                             }
                         }

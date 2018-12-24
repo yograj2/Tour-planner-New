@@ -1,10 +1,10 @@
 package com.example.yogra.tourplanner.Util;
 
 public class User {
-    public String name;
-    public String email;
-    public String password;
-    public String conformpassword;
+    private String name;
+    private String email;
+    private String password;
+    private String conformpassword;
 
     public String getName() {
         return name;
