@@ -36,4 +36,7 @@ public class Place {
         this.tourDescription = tourDescription;
         this.sightSeeing = sightSeeing;
     }
+    public Place(){
+
+    }
 }

@@ -61,6 +61,8 @@ public class SignupActivity extends AppCompatActivity {
         conformpassword = findViewById(R.id.ConformPassword);
         button = findViewById(R.id.signup);
         textView = findViewById(R.id.tv_signup_login);
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
 
         //progress Bar
 
@@ -127,7 +129,6 @@ public class SignupActivity extends AppCompatActivity {
 
                         //create database
 
-                        databaseReference = FirebaseDatabase.getInstance().getReference();
                         //String email = databaseReference.push().getKey();
                         String email = emailaddress.getText().toString();
                        // User  user = new User(Username,Email,Password,Conformpassword);

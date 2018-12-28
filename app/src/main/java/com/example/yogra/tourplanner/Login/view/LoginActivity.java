@@ -1,8 +1,10 @@
 package com.example.yogra.tourplanner.Login.view;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,7 +33,8 @@ public class LoginActivity extends AppCompatActivity {
     Intent intent;
     public DatabaseReference mdatabaseReference;
     public ProgressDialog progressDialog;
-    public FloatingActionButton floatingActionButton;
+    //public FloatingActionButton floatingActionButton;
+    private static final String TAG = "LoginActivity";
 
     //Firebase Authentication
     private FirebaseAuth firebaseAuth;
@@ -54,7 +57,9 @@ public class LoginActivity extends AppCompatActivity {
         loginpassword = findViewById(R.id.login_password);
         login = findViewById(R.id.login_button);
         signup = findViewById(R.id.signup_button);
-        floatingActionButton=findViewById(R.id.Home_button_admin);
+        //floatingActionButton=findViewById(R.id.Home_button_admin);
+
+
 
         //progress Dialog
         progressDialog = new ProgressDialog(this);
@@ -65,6 +70,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String Email = loginemailid.getText().toString();
                 String Password = loginpassword.getText().toString();
+
+
 
                 if (Email.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Email Id should not be empty", Toast.LENGTH_SHORT).show();
@@ -93,41 +100,62 @@ public class LoginActivity extends AppCompatActivity {
                     mdatabaseReference = FirebaseDatabase.getInstance().getReference();
                     final String email = loginemailid.getText().toString();
                     final String password = loginpassword.getText().toString();
-                    final String adminEmail = "admin@gmail.com";
-                    final String adminPassword = "admin@1234";
+                    /*final String adminEmail = "admin@gmail.com";
+                    final String adminPassword = "admin@1234";*/
 
                     DatabaseReference users = mdatabaseReference.child("users");
                     users.addListenerForSingleValueEvent(new ValueEventListener() {
                         boolean isExit = false;
 
+                        @SuppressLint("RestrictedApi")
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                                if (ds.child("email").getValue().toString().equals(email) && ds.child("password").getValue().toString().equals(password) ||
-                                        ds.child("email").getValue().toString().equals(adminEmail) && ds.child("password").getValue().toString().equals(adminPassword)
-                                        ) {
-                                    Log.d("Login","Added succesfullyy!!!!!!!!!!!!!!");
+                                if ((ds.child("email").getValue().toString().equals(email) && ds.child("password").getValue().toString().equals(password))
+                                        )
+                                {
+
+                                    Log.d(TAG,"Added succesfullyy!!!!!!!!!!!!!!");
                                     isExit = true;
                                     break;
                                 }
 
+
                             }
+
+
                             if (isExit) {
                                 intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                startActivity(intent);
-                               floatingActionButton.show();
+                               /* CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) floatingActionButton.getLayoutParams();
+                                params.setBehavior(null);
+                                floatingActionButton.requestLayout();
+                                floatingActionButton.setVisibility(View.GONE);*/
+                                //floatingActionButton.setEnabled(false);
+                                intent.putExtra("normalUser","Success");
 
-                            } else {
+                                startActivity(intent);
+
+                                Log.d(TAG,"Exits sucessfully");
+
+                              // floatingActionButton.show();
+
+                            }
+
+
+                            else {
                                 progressDialog.dismiss();
-                               floatingActionButton.hide();
+                               //floatingActionButton.hide();
+
                                 Toast.makeText(LoginActivity.this, "Please First Registered ", Toast.LENGTH_SHORT).show();
                             }
-                        }
+                           }
+
+
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                            Log.d("LoginActivity", "onCancelled : ");
+                            Log.d(TAG, "onCancelled : ");
                         }
                     });
                 }

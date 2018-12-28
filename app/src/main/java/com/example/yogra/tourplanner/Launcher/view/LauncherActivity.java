@@ -28,8 +28,9 @@ public class LauncherActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        },1000);
+        },2000);
         Log.d("Launcher","Successfully done");
 
     }
 }
+
