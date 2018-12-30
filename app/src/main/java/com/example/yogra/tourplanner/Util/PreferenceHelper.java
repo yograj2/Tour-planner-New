@@ -9,7 +9,7 @@ public class PreferenceHelper {
 
     private static PreferenceHelper instance;
 
-    public static final String IS_LOGIN = "islogin";
+    public static final String IS_LOGIN = "is_login";
 
     private PreferenceHelper(Context context){
 
@@ -25,10 +25,10 @@ public class PreferenceHelper {
         return instance;
     }
 
-    public void putBoolean(String key, boolean defaultValue){
+    public void putBoolean(String key, boolean value){
 
         SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putBoolean(key,defaultValue);
+        editor.putBoolean(key,value);
         editor.apply();
     }
 

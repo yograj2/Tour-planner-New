@@ -5,9 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
-    tools:context=".AddTourPlaces.TourActivity"
+    tools:context=".AddTourPlaces.view.AddTourActivity"
 
     >
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tour_image"
+        >
+
+    </android.support.constraint.ConstraintLayout>
 
 
     <android.support.constraint.ConstraintLayout

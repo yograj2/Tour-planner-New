@@ -22,7 +22,7 @@
         <activity android:name=".Login.view.LoginActivity" />
         <activity android:name=".Signup.view.SignupActivity" />
         <activity android:name=".Home.HomeActivity" />
-        <activity android:name=".AddTourPlaces.TourActivity"></activity>
+        <activity android:name=".AddTourPlaces.view.AddTourActivity"></activity>
     </application>
 
 </manifest>

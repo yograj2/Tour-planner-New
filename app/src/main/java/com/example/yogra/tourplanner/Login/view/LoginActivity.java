@@ -2,6 +2,7 @@ package com.example.yogra.tourplanner.Login.view;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
@@ -14,9 +15,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.yogra.tourplanner.BaseActivity;
 import com.example.yogra.tourplanner.Home.HomeActivity;
 import com.example.yogra.tourplanner.R;
 import com.example.yogra.tourplanner.Signup.view.SignupActivity;
+import com.example.yogra.tourplanner.TourPlannerConstant;
+import com.example.yogra.tourplanner.Util.PreferenceHelper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,13 +28,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     public Button signup;
     public Button login;
     public EditText loginemailid;
     public EditText loginpassword;
-    Intent intent;
+
     public DatabaseReference mdatabaseReference;
     public ProgressDialog progressDialog;
     //public FloatingActionButton floatingActionButton;
@@ -39,27 +43,20 @@ public class LoginActivity extends AppCompatActivity {
     //Firebase Authentication
     private FirebaseAuth firebaseAuth;
 
+    Context context;
+    Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        /*firebaseAuth = FirebaseAuth.getInstance();
-
-       if (firebaseAuth.getCurrentUser()!= null){
-            finish();
-            intent = new Intent(LoginActivity.this,HomeActivity.class);
-            startActivity(intent);
-            Log.d("LoginActivity","successfully done");
-        }*/
 
         loginemailid = findViewById(R.id.login_email_id);
         loginpassword = findViewById(R.id.login_password);
         login = findViewById(R.id.login_button);
         signup = findViewById(R.id.signup_button);
         //floatingActionButton=findViewById(R.id.Home_button_admin);
-
-
+        context=this;
 
         //progress Dialog
         progressDialog = new ProgressDialog(this);
@@ -105,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     DatabaseReference users = mdatabaseReference.child("users");
                     users.addListenerForSingleValueEvent(new ValueEventListener() {
-                        boolean isExit = false;
+                        boolean isExist = false;
 
                         @SuppressLint("RestrictedApi")
                         @Override
@@ -116,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
                                 {
 
                                     Log.d(TAG,"Added succesfullyy!!!!!!!!!!!!!!");
-                                    isExit = true;
+                                    isExist = true;
                                     break;
                                 }
 
@@ -124,24 +121,29 @@ public class LoginActivity extends AppCompatActivity {
                             }
 
 
-                            if (isExit) {
+                            if (isExist) {
                                 intent = new Intent(LoginActivity.this, HomeActivity.class);
                                /* CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) floatingActionButton.getLayoutParams();
                                 params.setBehavior(null);
                                 floatingActionButton.requestLayout();
                                 floatingActionButton.setVisibility(View.GONE);*/
                                 //floatingActionButton.setEnabled(false);
-                                intent.putExtra("normalUser","Success");
-
+                                String userType;
+                                if  (email.equalsIgnoreCase("admin@gmail.com")) {
+                                    userType = TourPlannerConstant.ADMIN_USER;
+                                } else {
+                                    userType = TourPlannerConstant.NORMAL_USER;
+                                }
+                                intent.putExtra(TourPlannerConstant.USER_TYPE,userType);
                                 startActivity(intent);
+                                mPreferenceHelper.putBoolean(PreferenceHelper.IS_LOGIN,true);
+                                Log.d(TAG,"preference sucessfully");
+                                finish();
 
-                                Log.d(TAG,"Exits sucessfully");
 
                               // floatingActionButton.show();
 
                             }
-
-
                             else {
                                 progressDialog.dismiss();
                                //floatingActionButton.hide();
@@ -169,5 +171,10 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void init() {
+
     }
 }

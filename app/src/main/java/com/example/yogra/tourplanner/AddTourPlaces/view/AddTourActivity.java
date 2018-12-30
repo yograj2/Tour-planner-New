@@ -1,4 +1,4 @@
-package com.example.yogra.tourplanner.AddTourPlaces;
+package com.example.yogra.tourplanner.AddTourPlaces.view;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -17,14 +17,14 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class TourActivity extends AppCompatActivity {
+public class AddTourActivity extends AppCompatActivity {
 
     public EditText tourplace;
     public EditText tourdescription;
     public EditText seightseing;
     public Button buttonAdd;
     public DatabaseReference databaseReference;
-    private static final String TAG = "TourActivity";
+    private static final String TAG = "AddTourActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class TourActivity extends AppCompatActivity {
                 String sightSeeing=seightseing.getText().toString();
 
                /* if (tourPlace.isEmpty()){
-                    Toast.makeText(TourActivity.this, "not be empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddTourActivity.this, "not be empty", Toast.LENGTH_SHORT).show();
                 }*/
 
                // Place place = new Place(tourPlace,tourDescription,sightSeeing);
@@ -55,7 +55,7 @@ public class TourActivity extends AppCompatActivity {
                 place.setTourDescription(tourdescription.getText().toString());
                 place.setSightSeeing(seightseing.getText().toString());
 
-                databaseReference.child("TourPlace").setValue(place)
+                databaseReference.child("TourPlace").child(String.valueOf(System.currentTimeMillis())).setValue(place)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {

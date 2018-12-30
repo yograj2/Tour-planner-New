@@ -11,7 +11,7 @@ import com.example.yogra.tourplanner.Util.PreferenceHelper;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    public PreferenceHelper mpreferenceHelper;
+    public PreferenceHelper mPreferenceHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,7 @@ public abstract class BaseActivity extends AppCompatActivity {
        /* Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);*/
 
-        mpreferenceHelper = PreferenceHelper.getInstance(this);
+        mPreferenceHelper = PreferenceHelper.getInstance(this);
 
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
