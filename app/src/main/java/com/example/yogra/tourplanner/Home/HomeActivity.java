@@ -21,6 +21,7 @@ import com.example.yogra.tourplanner.Util.MyAdapter;
 import com.example.yogra.tourplanner.R;
 import com.example.yogra.tourplanner.Util.Place;
 import com.example.yogra.tourplanner.Util.PreferenceHelper;
+import com.example.yogra.tourplanner.Util.SystemUtil;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -56,12 +57,13 @@ public class HomeActivity extends BaseActivity {
         floatingActionButtonAdmin = findViewById(R.id.Home_button_admin);
         logout = findViewById(R.id.logout_button);
 
+        SystemUtil.isStoragePermissionGranted(this);
+
         intent = getIntent();
         //String normalUser=intent.getStringExtra("normalUser");
         //String adminUser=intent.getStringExtra("admin");
 
         String userType = intent.getStringExtra(TourPlannerConstant.USER_TYPE);
-
         if (TourPlannerConstant.NORMAL_USER.equalsIgnoreCase(userType)) {
             floatingActionButtonAdmin.setVisibility(View.GONE);
         } else {

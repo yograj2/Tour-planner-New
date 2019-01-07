@@ -1,12 +1,15 @@
 package com.example.yogra.tourplanner.Util;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.yogra.tourplanner.R;
@@ -36,6 +39,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         myViewHolder.tourPlace.setText(tourdetails.get(position).getTourPlace());
         myViewHolder.tourDescription.setText(tourdetails.get(position).getTourDescription());
         myViewHolder.tourSightseeing.setText(tourdetails.get(position).getSightSeeing());
+      // myViewHolder.mImagedata.setImageResource(tourdetails.get(position).getImageData());
+        //  viewHolder.imgViewIcon.setImageResource(itemsData[position].getImageUrl());
 
     }
 
@@ -47,13 +52,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     class MyViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tourPlace,tourDescription,tourSightseeing;
+        ImageView mImagedata;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            tourPlace = itemView.findViewById(R.id.rec_place);
-            tourDescription = itemView.findViewById(R.id.rec_description);
-            tourSightseeing=itemView.findViewById(R.id.rec_sightseeing);
+            tourPlace = itemView.findViewById(R.id.tv_place_recycler_view);
+            tourDescription = itemView.findViewById(R.id.tv_description_recycler_view);
+
+             tourSightseeing=itemView.findViewById(R.id.tv_sightseeing_recycler_view);
+             mImagedata=itemView.findViewById(R.id.iv_recycler_view);
+            // cardView=itemView.findViewById(R.id.cardview);
 
         }
     }

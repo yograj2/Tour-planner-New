@@ -10,6 +10,7 @@ public class PreferenceHelper {
     private static PreferenceHelper instance;
 
     public static final String IS_LOGIN = "is_login";
+    public static final String CURRENT_USER_EMAIL = "current_user_email";
 
     private PreferenceHelper(Context context){
 

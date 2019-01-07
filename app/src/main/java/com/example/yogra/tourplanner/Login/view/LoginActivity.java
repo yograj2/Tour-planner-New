@@ -104,7 +104,7 @@ public class LoginActivity extends BaseActivity {
                     users.addListenerForSingleValueEvent(new ValueEventListener() {
                         boolean isExist = false;
 
-                        @SuppressLint("RestrictedApi")
+                       // @SuppressLint("RestrictedApi")
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             for (DataSnapshot ds : dataSnapshot.getChildren()) {
