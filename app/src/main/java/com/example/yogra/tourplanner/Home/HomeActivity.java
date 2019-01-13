@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -40,8 +42,10 @@ public class HomeActivity extends BaseActivity {
     public Button logout;
     //PreferenceHelper mPreference;
     public boolean shared;
+    public CardView cardView;
     Context context;
     Intent intent;
+
 
 
     @Override
@@ -49,13 +53,16 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+
+
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         tourdetails = new ArrayList<Place>();
         context = this;
 
         floatingActionButtonAdmin = findViewById(R.id.Home_button_admin);
-        logout = findViewById(R.id.logout_button);
+       // logout = findViewById(R.id.logout_button);
+        cardView = findViewById(R.id.cardview);
 
         SystemUtil.isStoragePermissionGranted(this);
 
@@ -75,14 +82,18 @@ public class HomeActivity extends BaseActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    Log.d("TAG", "inside onDataChnaged " + ds);
+                    Log.d("TAG", "inside onDataChnaged " + ds.getKey());
                     Place p = ds.getValue(Place.class);
+                    p.setId(ds.getKey());
+                   /* Place place = new Place();
+                    String name = p.getTourPlace();
+                    place.setTourPlace(name);*/
+                   // String demo = p.getTourPlace();
                     tourdetails.add(p);
                 }
                 adapter = new MyAdapter(HomeActivity.this, tourdetails);
                 recyclerView.setAdapter(adapter);
-
-            }
+                }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -90,7 +101,7 @@ public class HomeActivity extends BaseActivity {
             }
         });
 
-        logout.setOnClickListener(new View.OnClickListener() {
+        /*logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                  intent = new Intent(HomeActivity.this, LoginActivity.class);
@@ -98,37 +109,8 @@ public class HomeActivity extends BaseActivity {
                 mPreferenceHelper.putBoolean(PreferenceHelper.IS_LOGIN,false);
 
             }
-        });
-
-        /*final String email = "admin@gmail.com";
-        final String password = "admin@1234";
-
-        DatabaseReference users = databaseReference.child("users");
-        users.addListenerForSingleValueEvent(new ValueEventListener() {
-            boolean isExit = false;
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds: dataSnapshot.getChildren()){
-                    if (ds.child("email").getValue().toString().equals(email)
-                            && ds.child("password").getValue().toString().equals(password)){
-                        isExit = true;
-                    }
-                }
-                if (isExit){
-                    floatingActionButtonAdmin.show();
-                }
-                else {
-                    floatingActionButtonAdmin.hide();
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d("HomeActivity","Canelled");
-
-            }
         });*/
+
 
         floatingActionButtonAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,10 +119,27 @@ public class HomeActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.logout){
+            Intent intent = new Intent(HomeActivity.this,LoginActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
     protected void init() {
 
     }
+
 }

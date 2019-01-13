@@ -3,9 +3,8 @@
     package="com.example.yogra.tourplanner">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -25,7 +24,9 @@
         <activity android:name=".Login.view.LoginActivity" />
         <activity android:name=".Signup.view.SignupActivity" />
         <activity android:name=".Home.HomeActivity" />
-        <activity android:name=".AddTourPlaces.view.AddTourActivity"></activity>
+        <activity android:name=".AddTourPlaces.view.AddTourActivity" />
+        <activity android:name=".Home.NewHomeActivity" />
     </application>
 
 </manifest>
+

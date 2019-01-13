@@ -34,6 +34,7 @@ public class AddTourActivity extends Activity {
     public EditText tourplace;
     public EditText tourdescription;
     public EditText tourseightseing;
+    public EditText dayNight;
     public Button buttonAdd;
     public DatabaseReference databaseReference;
     public FloatingActionButton mFloatingActionButton;
@@ -52,6 +53,7 @@ public class AddTourActivity extends Activity {
         tourplace = findViewById(R.id.et_tour_place_info);
         tourdescription = findViewById(R.id.et_tour_description_info);
         tourseightseing = findViewById(R.id.et_tour_seightseeing_info);
+        dayNight = findViewById(R.id.et_tour_dayNight_info);
         buttonAdd = findViewById(R.id.btn_add);
         mFloatingActionButton = findViewById(R.id.add_tour_floatingButton);
         mIvPlaceImage = findViewById(R.id.iv_tour_image);
@@ -64,6 +66,7 @@ public class AddTourActivity extends Activity {
                 String tourPlace = tourplace.getText().toString();
                 String tourDescription=tourdescription.getText().toString();
                 String tourSeightseeing=tourseightseing.getText().toString();
+                String tourDaynight = dayNight.getText().toString();
                 String imageData = mImageData.getBytes().toString();
 
                 if (tourPlace.isEmpty()){
@@ -74,6 +77,10 @@ public class AddTourActivity extends Activity {
                 }
                 else if (tourSeightseeing.isEmpty()){
                     Toast.makeText(AddTourActivity.this, "seightseeing should not be empty", Toast.LENGTH_SHORT).show();
+                }
+                else if (tourDaynight.isEmpty()){
+                    Toast.makeText(AddTourActivity.this, "dayNight should not be empty", Toast.LENGTH_SHORT).show();
+
                 }
                 else if (imageData.isEmpty()){
                     Toast.makeText(AddTourActivity.this, "image should not be empty", Toast.LENGTH_SHORT).show();
@@ -86,7 +93,11 @@ public class AddTourActivity extends Activity {
                     place.setTourPlace(tourplace.getText().toString());
                     place.setTourDescription(tourdescription.getText().toString());
                     place.setSightSeeing(tourseightseing.getText().toString());
-                    place.setImageData(mImageData.getBytes().toString());
+                    place.setNightCharge(Integer.parseInt(dayNight.getText().toString()));
+
+                    place.setImageData(mImageData);
+
+                    //String placeName = tourplace.getText().toString();
 
                     databaseReference.child("TourPlace").child(String.valueOf(System.currentTimeMillis())).setValue(place)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {

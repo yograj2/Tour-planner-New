@@ -5,15 +5,34 @@ public class Place {
     private String tourPlace;
     private String tourDescription;
     private String sightSeeing;
+    private int nightCharge;
     private String imageData;
+    private String id;
+
+    public int getNightCharge() {
+        return nightCharge;
+    }
+
+    public void setNightCharge(int nightCharge) {
+        this.nightCharge = nightCharge;
+    }
 
     public Place(){}
 
-    public Place(String tourPlace, String tourDescription, String sightSeeing,String imageData) {
+    public Place(String tourPlace, String tourDescription, String sightSeeing,String imageData,int nightCharge) {
         this.tourPlace = tourPlace;
         this.tourDescription = tourDescription;
         this.sightSeeing = sightSeeing;
+        this.nightCharge = nightCharge;
         this.imageData = imageData;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTourPlace() {

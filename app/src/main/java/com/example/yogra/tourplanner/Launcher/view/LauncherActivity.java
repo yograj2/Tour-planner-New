@@ -34,6 +34,7 @@ public class LauncherActivity extends BaseActivity {
                 if (status) {
                     Intent intent= new Intent(LauncherActivity.this,HomeActivity.class);
                     startActivity(intent);
+
                 } else {
                     Intent intent= new Intent(LauncherActivity.this,LoginActivity.class);
                     startActivity(intent);
