@@ -53,7 +53,7 @@
             android:layout_marginRight="16dp"
             android:maxLines="4"
             android:ellipsize="end"
-            android:textColor="#D3D3D3"
+            android:textColor="#939393"
             android:textSize="16sp" />
 
         <TextView
@@ -64,6 +64,13 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_day_night_charges"
+            app:layout_constraintTop_toBottomOf="@id/tv_sightseeing_recycler_view"
+            />
 
     </android.support.constraint.ConstraintLayout>
 

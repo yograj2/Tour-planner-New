@@ -19,12 +19,13 @@ public class Place {
 
     public Place(){}
 
-    public Place(String tourPlace, String tourDescription, String sightSeeing,String imageData,int nightCharge) {
+    public Place(String tourPlace, String tourDescription, String sightSeeing,String imageData,int nightCharge,String id) {
         this.tourPlace = tourPlace;
         this.tourDescription = tourDescription;
         this.sightSeeing = sightSeeing;
         this.nightCharge = nightCharge;
         this.imageData = imageData;
+        this.id = id;
     }
 
     public String getId() {

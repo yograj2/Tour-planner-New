@@ -25,8 +25,7 @@
         <activity android:name=".Signup.view.SignupActivity" />
         <activity android:name=".Home.HomeActivity" />
         <activity android:name=".AddTourPlaces.view.AddTourActivity" />
-        <activity android:name=".Home.NewHomeActivity" />
+        <activity android:name=".SiteInfo"></activity>
     </application>
 
 </manifest>
-

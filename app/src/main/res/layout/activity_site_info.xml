@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SiteInfo"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linear_layout"
+        android:paddingBottom="10dp">
+
+
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        >
+
+            <ImageView
+                android:id="@+id/iv_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                />
+
+        <TextView
+            android:id="@+id/tv_day_night"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBlack"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:text="5N/6D"
+            app:layout_constraintBottom_toBottomOf="@id/iv_image"
+            app:layout_constraintEnd_toEndOf="@id/iv_image"
+            android:padding="5dp"
+
+            />
+
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_place_recycler_view_main"
+                app:layout_constraintTop_toBottomOf="@id/iv_image"
+                android:layout_marginTop="4dp"
+                android:textStyle="bold"
+                android:textColor="#939393"
+                android:textSize="22sp"
+                />
+
+            <TextView
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_description_recycler_view_main"
+                app:layout_constraintTop_toBottomOf="@id/tv_place_recycler_view_main"
+                android:textSize="16sp"
+                />
+
+        <TextView
+            android:id="@+id/tv_sightseeing_recycler_view_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_description_recycler_view_main" />
+
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/calculate"
+            android:layout_weight="2"
+            android:text="CALCULATE"
+            android:background="#ff0000"
+            android:textColor="#FFFFFF"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/booknow"
+            android:layout_weight="2"
+            android:text="BOOK NOW"
+            android:background="#ff0000"
+            android:textColor="#FFFFFF"
+
+            />
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
+

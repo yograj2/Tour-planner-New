@@ -31,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class HomeActivity extends BaseActivity {
 
@@ -45,8 +46,7 @@ public class HomeActivity extends BaseActivity {
     public CardView cardView;
     Context context;
     Intent intent;
-
-
+    private static final String TAG = "HomeActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,8 @@ public class HomeActivity extends BaseActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         tourdetails = new ArrayList<Place>();
         context = this;
-
+        int randomNum = ThreadLocalRandom.current().nextInt(4, 9 + 1);
+        Log.d(TAG, "Random Number : " + randomNum);
         floatingActionButtonAdmin = findViewById(R.id.Home_button_admin);
        // logout = findViewById(R.id.logout_button);
         cardView = findViewById(R.id.cardview);
@@ -141,5 +142,4 @@ public class HomeActivity extends BaseActivity {
     protected void init() {
 
     }
-
 }

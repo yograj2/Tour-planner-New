@@ -2,6 +2,7 @@ package com.example.yogra.tourplanner.Util;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -15,8 +16,8 @@ import android.widget.TextView;
 
 //import com.example.yogra.tourplanner.Home.NewHomeActivity;
 import com.bumptech.glide.Glide;
-import com.example.yogra.tourplanner.Home.NewHomeActivity;
 import com.example.yogra.tourplanner.R;
+import com.example.yogra.tourplanner.SiteInfo;
 import com.example.yogra.tourplanner.TourPlannerConstant;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private ArrayList<Place> tourdetails;
 
     private static final String TAG = "MyAdapter";
+    public Intent intent;
 
     public MyAdapter(Context context, ArrayList<Place> tourdetails) {
         this.context = context;
@@ -34,19 +36,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i)
-    {
-        Log.d("MyAdapter","inseide adapter");
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        Log.d("MyAdapter", "inseide adapter");
 
-        return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.recycler_view,viewGroup,false));
+        return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.recycler_view, viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int position) {
+    public void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, int position) {
         final Place place = tourdetails.get(position);
         myViewHolder.tourPlace.setText(place.getTourPlace());
-        myViewHolder.tourDescription.setText(tourdetails.get(position).getTourDescription());
-        myViewHolder.tourSightseeing.setText(tourdetails.get(position).getSightSeeing());
+        myViewHolder.tourDescription.setText(place.getTourDescription());
+        myViewHolder.tourSightseeing.setText(place.getSightSeeing());
         Log.d(TAG, "onBindViewHolder() -> image Data : " + place.getImageData());
         byte[] imageByteArray = Base64.decode(place.getImageData(), Base64.DEFAULT);
         Glide.with(context)
@@ -56,13 +57,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         myViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,NewHomeActivity.class);
+                /*int clickedPosition=myViewHolder.getAdapterPosition();
+                Place clickedUser=tourdetails.get(clickedPosition);
+*/
+                intent = new Intent(context, SiteInfo.class);
                 intent.putExtra(TourPlannerConstant.TOUR_PLACE_ID, place.getId());
+                /*intent.putExtra(TourPlannerConstant.TOUR_PLACE_NAME,clickedUser.getTourPlace());
+                intent.putExtra(TourPlannerConstant.TOUR_PLACE_DESCRIPTION,clickedUser.getTourDescription());;
+                intent.putExtra(TourPlannerConstant.TOUR_PLACE_SIGHTSEEING,clickedUser.getSightSeeing());
+              intent.putExtra(TourPlannerConstant.TOUR_PLACE_IMAGE,clickedUser.getImageData());*/
+                // context.startActivity(intent);
                 context.startActivity(intent);
             }
         });
+
+
         //myViewHolder.mImagedata.
-      // myViewHolder.mImagedata.setImageResource(tourdetails.get(position).getImageData());
+        // myViewHolder.mImagedata.setImageResource(tourdetails.get(position).getImageData());
         //  viewHolder.imgViewIcon.setImageResource(itemsData[position].getImageUrl());
 
 
@@ -82,7 +93,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tourPlace,tourDescription,tourSightseeing;
+        private TextView tourPlace, tourDescription, tourSightseeing, cost;
         private CardView cardView;
         ImageView mImagedata;
 
@@ -91,10 +102,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
             tourPlace = itemView.findViewById(R.id.tv_place_recycler_view);
             tourDescription = itemView.findViewById(R.id.tv_description_recycler_view);
-            tourSightseeing=itemView.findViewById(R.id.tv_sightseeing_recycler_view);
-             mImagedata=itemView.findViewById(R.id.iv_recycler_view);
-             cardView=itemView.findViewById(R.id.cardview);
-
+            tourSightseeing = itemView.findViewById(R.id.tv_sightseeing_recycler_view);
+            mImagedata = itemView.findViewById(R.id.iv_recycler_view);
+            cardView = itemView.findViewById(R.id.cardview);
+            /* cost = itemView.findViewById(R.id.)*/
 
         }
     }
