@@ -21,6 +21,7 @@ import com.example.yogra.tourplanner.SiteInfo;
 import com.example.yogra.tourplanner.TourPlannerConstant;
 
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private Context context;
@@ -48,6 +49,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         myViewHolder.tourPlace.setText(place.getTourPlace());
         myViewHolder.tourDescription.setText(place.getTourDescription());
         myViewHolder.tourSightseeing.setText(place.getSightSeeing());
+
+        final int randomNum = ThreadLocalRandom.current().nextInt(4, 9 + 1);
+        Log.d(TAG, "Random Number : " + randomNum);
+        myViewHolder.numberOfNights.setText(String.valueOf(randomNum)+"N /"+(randomNum+1)+"D");
+        myViewHolder.cost.setText(String.valueOf(place.getNightCharge()*randomNum));
+
         Log.d(TAG, "onBindViewHolder() -> image Data : " + place.getImageData());
         byte[] imageByteArray = Base64.decode(place.getImageData(), Base64.DEFAULT);
         Glide.with(context)
@@ -66,6 +73,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 intent.putExtra(TourPlannerConstant.TOUR_PLACE_DESCRIPTION,clickedUser.getTourDescription());;
                 intent.putExtra(TourPlannerConstant.TOUR_PLACE_SIGHTSEEING,clickedUser.getSightSeeing());
               intent.putExtra(TourPlannerConstant.TOUR_PLACE_IMAGE,clickedUser.getImageData());*/
+                intent.putExtra("cost",place.getNightCharge()*randomNum);
                 // context.startActivity(intent);
                 context.startActivity(intent);
             }
@@ -93,7 +101,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tourPlace, tourDescription, tourSightseeing, cost;
+        private TextView tourPlace, tourDescription, tourSightseeing, cost,numberOfNights;
         private CardView cardView;
         ImageView mImagedata;
 
@@ -105,7 +113,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             tourSightseeing = itemView.findViewById(R.id.tv_sightseeing_recycler_view);
             mImagedata = itemView.findViewById(R.id.iv_recycler_view);
             cardView = itemView.findViewById(R.id.cardview);
-            /* cost = itemView.findViewById(R.id.)*/
+             cost = itemView.findViewById(R.id.tv_day_night_charges);
+             numberOfNights = itemView.findViewById(R.id.tv_price_label);
 
         }
     }

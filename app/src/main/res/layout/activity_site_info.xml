@@ -34,14 +34,13 @@
         <TextView
             android:id="@+id/tv_day_night"
             android:layout_width="60dp"
-            android:layout_height="wrap_content"
+            android:layout_height="29dp"
             android:background="@color/colorBlack"
             android:gravity="center"
+            android:padding="5dp"
             android:textColor="@color/colorWhite"
-            android:text="5N/6D"
             app:layout_constraintBottom_toBottomOf="@id/iv_image"
             app:layout_constraintEnd_toEndOf="@id/iv_image"
-            android:padding="5dp"
 
             />
 
@@ -81,7 +80,7 @@
     <LinearLayout
         android:id="@+id/linear_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <Button
@@ -89,18 +88,26 @@
             android:layout_height="wrap_content"
             android:id="@+id/calculate"
             android:layout_weight="2"
-            android:text="CALCULATE"
-            android:background="#ff0000"
-            android:textColor="#FFFFFF"
+            android:background=" #c2c2a3"
+            android:textColor="#FF1A1919"
+
             />
+
+       <!-- <TextView
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="2"
+            android:background="#ff0000"
+
+            />-->
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/booknow"
             android:layout_weight="2"
             android:text="BOOK NOW"
-            android:background="#ff0000"
-            android:textColor="#FFFFFF"
+            android:background="#ffad33"
+            android:textColor="#FF1A1919"
 
             />
 

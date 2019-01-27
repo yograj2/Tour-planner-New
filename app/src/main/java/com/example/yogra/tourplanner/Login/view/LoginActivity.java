@@ -116,11 +116,7 @@ public class LoginActivity extends BaseActivity {
                                     isExist = true;
                                     break;
                                 }
-
-
                             }
-
-
                             if (isExist) {
                                 intent = new Intent(LoginActivity.this, HomeActivity.class);
                                /* CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) floatingActionButton.getLayoutParams();
@@ -134,7 +130,10 @@ public class LoginActivity extends BaseActivity {
                                 } else {
                                     userType = TourPlannerConstant.NORMAL_USER;
                                 }
-                                intent.putExtra(TourPlannerConstant.USER_TYPE,userType);
+                                //intent.putExtra(TourPlannerConstant.USER_TYPE,userType);
+                                //mPreferenceHelper.putBoolean("check",true);
+                                mPreferenceHelper.putExtra(TourPlannerConstant.USER_TYPE,userType);
+
                                 startActivity(intent);
                                 mPreferenceHelper.putBoolean(PreferenceHelper.IS_LOGIN,true);
                                 Log.d(TAG,"preference sucessfully");

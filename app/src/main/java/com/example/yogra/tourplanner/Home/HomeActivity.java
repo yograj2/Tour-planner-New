@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +17,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
+//import android.widget.Toolbar;
+import android.support.v7.widget.Toolbar;
 import com.example.yogra.tourplanner.AddTourPlaces.view.AddTourActivity;
 import com.example.yogra.tourplanner.BaseActivity;
 import com.example.yogra.tourplanner.Login.view.LoginActivity;
@@ -46,6 +50,7 @@ public class HomeActivity extends BaseActivity {
     public CardView cardView;
     Context context;
     Intent intent;
+    private DrawerLayout drawerLayout;
     private static final String TAG = "HomeActivity";
 
     @Override
@@ -53,14 +58,27 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);*/
+
+        //drawer Layout
+
+        /*drawerLayout = findViewById(R.id.drawer_layout);
+
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,
+                R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();*/
+
 
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         tourdetails = new ArrayList<Place>();
         context = this;
-        int randomNum = ThreadLocalRandom.current().nextInt(4, 9 + 1);
-        Log.d(TAG, "Random Number : " + randomNum);
+
+
+
         floatingActionButtonAdmin = findViewById(R.id.Home_button_admin);
        // logout = findViewById(R.id.logout_button);
         cardView = findViewById(R.id.cardview);
@@ -71,12 +89,16 @@ public class HomeActivity extends BaseActivity {
         //String normalUser=intent.getStringExtra("normalUser");
         //String adminUser=intent.getStringExtra("admin");
 
-        String userType = intent.getStringExtra(TourPlannerConstant.USER_TYPE);
-        if (TourPlannerConstant.NORMAL_USER.equalsIgnoreCase(userType)) {
+        //String userType = intent.getStringExtra(TourPlannerConstant.USER_TYPE);
+        String userType=mPreferenceHelper.getString(TourPlannerConstant.USER_TYPE,"");
+        if (TourPlannerConstant.NORMAL_USER.equalsIgnoreCase(userType))
+        {
             floatingActionButtonAdmin.setVisibility(View.GONE);
         } else {
             floatingActionButtonAdmin.setVisibility(View.VISIBLE);
         }
+
+
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("TourPlace");
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -122,6 +144,15 @@ public class HomeActivity extends BaseActivity {
         });
 
     }
+
+   /* @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

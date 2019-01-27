@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
         <activity android:name=".Launcher.view.LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +27,8 @@
         <activity android:name=".Signup.view.SignupActivity" />
         <activity android:name=".Home.HomeActivity" />
         <activity android:name=".AddTourPlaces.view.AddTourActivity" />
-        <activity android:name=".SiteInfo"></activity>
+        <activity android:name=".SiteInfo" />
+        <activity android:name=".Util.Calculation"></activity>
     </application>
 
 </manifest>
