@@ -16,7 +16,9 @@
         android:src="@drawable/project_imagefive"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:alpha="0.8"
+        />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/login_constraint"

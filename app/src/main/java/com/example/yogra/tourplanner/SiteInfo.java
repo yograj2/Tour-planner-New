@@ -58,9 +58,9 @@ public class SiteInfo extends AppCompatActivity {
         places = findViewById(R.id.tv_place_recycler_view_main);
         description = findViewById(R.id.tv_description_recycler_view_main);
         sightSeeing=findViewById(R.id.tv_sightseeing_recycler_view_main);
-        price = findViewById(R.id.tv_day_night);
+        //price = findViewById(R.id.tv_day_night);
        // button = findViewById(R.id.siteinfo_btn);
-        total_cost = findViewById(R.id.tv_day_night);
+        //total_cost = findViewById(R.id.tv_day_night);
         buttonPrice = findViewById(R.id.calculate);
 
         intent = getIntent();
@@ -96,7 +96,7 @@ public class SiteInfo extends AppCompatActivity {
             }
         });
 
-        price.setOnClickListener(new View.OnClickListener() {
+        /*price.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -106,10 +106,10 @@ public class SiteInfo extends AppCompatActivity {
         total_cost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*intent = new Intent(SiteInfo.this,Calculation.class);
-                startActivity(intent);*/
+                *//*intent = new Intent(SiteInfo.this,Calculation.class);
+                startActivity(intent);*//*
             }
-        });
+        });*/
 
         Bundle bundle = getIntent().getExtras();
         int totalCost=bundle.getInt("cost");

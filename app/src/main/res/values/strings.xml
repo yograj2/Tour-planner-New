@@ -10,7 +10,13 @@
     <string name="place">Place</string>
     <string name="decription">description</string>
     <string name="seightseeing">Seightseeing</string>
-    
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="price_low_to_high">Price Low to High</string>
+    <string name="price_high_to_low">Price High to Low</string>
+
+    <string name="budget_filter">Budget</string>
+    <string name="duration_filter">Duration</string>
 </resources>

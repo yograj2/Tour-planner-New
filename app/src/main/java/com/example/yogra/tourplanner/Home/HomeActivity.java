@@ -16,11 +16,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 //import android.widget.Toolbar;
 import android.support.v7.widget.Toolbar;
 import com.example.yogra.tourplanner.AddTourPlaces.view.AddTourActivity;
 import com.example.yogra.tourplanner.BaseActivity;
+import com.example.yogra.tourplanner.BottomSheetDialog.BottomSheetDialog;
 import com.example.yogra.tourplanner.Login.view.LoginActivity;
 import com.example.yogra.tourplanner.TourPlannerConstant;
 import com.example.yogra.tourplanner.Util.MyAdapter;
@@ -52,6 +54,8 @@ public class HomeActivity extends BaseActivity {
     Intent intent;
     private DrawerLayout drawerLayout;
     private static final String TAG = "HomeActivity";
+    public TextView sort;
+    public TextView filter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +74,10 @@ public class HomeActivity extends BaseActivity {
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();*/
 
+        //Bottom Dialgog
+
+        sort = findViewById(R.id.tv_sort);
+        filter = findViewById(R.id.tv_filter);
 
 
         recyclerView = findViewById(R.id.recycler_view);
@@ -143,6 +151,16 @@ public class HomeActivity extends BaseActivity {
             }
         });
 
+        //Bottom Sheet Dialog
+
+        sort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog();
+                bottomSheetDialog.show(getSupportFragmentManager(),bottomSheetDialog.getTag());
+            }
+        });
+
     }
 
    /* @Override
@@ -169,8 +187,12 @@ public class HomeActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+
+
     @Override
     protected void init() {
 
     }
+
 }
