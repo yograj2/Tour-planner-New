@@ -1,22 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottom_sheet_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_margin="16dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    >
 
     <CheckBox
+        android:id="@+id/checkbox_click"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:padding="5dp"
         android:text="@string/budget_filter"
-        android:id="@+id/cb_budget"
+        android:textSize="16sp"
+        android:layout_marginStart="8dp"
         />
+
+
+    <TextView
+        android:id="@+id/tv_One"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/checkbox_click"
+        android:background="@drawable/textview_border"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text="@string/budget_price_one"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/checkbox_click"
+        android:layout_marginBottom="10dp"
+        android:layout_toEndOf="@id/tv_One"
+        android:background="@drawable/textview_border"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text="@string/budget_price_two"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/checkbox_click"
+        android:layout_marginBottom="10dp"
+        android:layout_toEndOf="@id/tv_two"
+        android:background="@drawable/textview_border"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text="@string/budget_price_three"
+        android:textSize="16sp"
+        />
+
     <CheckBox
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/cb_budget"
+        android:layout_below="@id/tv_One"
         android:text="@string/duration_filter"
-        android:layout_marginTop="16dp"
-        android:id="@+id/cb_duration"
+        android:textSize="16sp"
+        android:id="@+id/checkbox_two"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="8dp"
         />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_day_one"
+        android:text="1 to 3"
+        android:textSize="16sp"
+        android:layout_below="@id/checkbox_two"
+        android:layout_marginStart="48dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/textview_border"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_day_two"
+        android:text="3 to 5"
+        android:textSize="16sp"
+        android:layout_toEndOf="@id/tv_day_one"
+        android:layout_below="@id/checkbox_two"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/textview_border"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_day_three"
+        android:text="6 to 8"
+        android:textSize="16sp"
+        android:layout_toEndOf="@id/tv_day_two"
+        android:layout_below="@id/checkbox_two"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/textview_border"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        />
+
+
+
+</RelativeLayout>

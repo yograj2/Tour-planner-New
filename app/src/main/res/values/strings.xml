@@ -19,4 +19,10 @@
 
     <string name="budget_filter">Budget</string>
     <string name="duration_filter">Duration</string>
+
+    <string name="budget_price_one">&lt; 2000</string>
+    <string name="budget_price_two">&lt; 3000</string>
+    <string name="budget_price_three">&lt; 4000</string>
+
+
 </resources>

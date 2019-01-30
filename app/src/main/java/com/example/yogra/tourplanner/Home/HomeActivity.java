@@ -23,6 +23,7 @@ import android.support.v7.widget.Toolbar;
 import com.example.yogra.tourplanner.AddTourPlaces.view.AddTourActivity;
 import com.example.yogra.tourplanner.BaseActivity;
 import com.example.yogra.tourplanner.BottomSheetDialog.BottomSheetDialog;
+import com.example.yogra.tourplanner.BottomSheetDialog.BottomSheetFilter;
 import com.example.yogra.tourplanner.Login.view.LoginActivity;
 import com.example.yogra.tourplanner.TourPlannerConstant;
 import com.example.yogra.tourplanner.Util.MyAdapter;
@@ -158,6 +159,14 @@ public class HomeActivity extends BaseActivity {
             public void onClick(View v) {
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog();
                 bottomSheetDialog.show(getSupportFragmentManager(),bottomSheetDialog.getTag());
+            }
+        });
+
+        filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomSheetFilter bottomSheetFilter = new BottomSheetFilter();
+                bottomSheetFilter.show(getSupportFragmentManager(),bottomSheetFilter.getTag());
             }
         });
 
