@@ -9,8 +9,8 @@
     android:layout_marginStart="16dp"
     android:layout_marginTop="4dp"
     android:layout_marginEnd="16dp"
-    android:layout_marginBottom="4dp"
-    app:cardCornerRadius="10dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="4dp"
 
     >
 
@@ -75,6 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Total Cost: "
+            android:textColor="#262626"
             android:paddingLeft="6dp"
             android:layout_marginTop="4dp"
             android:layout_marginRight="8dp"
@@ -89,6 +90,7 @@
             android:layout_marginTop="4dp"
             app:layout_constraintStart_toEndOf="@id/charge_label"
             app:layout_constraintTop_toBottomOf="@id/tv_sightseeing_recycler_view"
+            android:textColor="#262626"
 
             />
     </android.support.constraint.ConstraintLayout>

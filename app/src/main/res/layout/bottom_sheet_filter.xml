@@ -3,9 +3,11 @@
     android:id="@+id/bottom_sheet_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
+    android:paddingBottom="20dp"
+    android:paddingTop="20dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+
     >
 
     <CheckBox
@@ -17,7 +19,7 @@
         android:text="@string/budget_filter"
         android:textSize="16sp"
         android:layout_marginStart="8dp"
-        />
+        android:layout_marginTop="8dp" />
 
 
     <TextView
@@ -45,8 +47,7 @@
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:text="@string/budget_price_two"
-        android:textSize="16sp"
-        />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tv_three"
@@ -60,8 +61,7 @@
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:text="@string/budget_price_three"
-        android:textSize="16sp"
-        />
+        android:textSize="16sp" />
 
     <CheckBox
         android:layout_width="match_parent"
@@ -71,8 +71,7 @@
         android:textSize="16sp"
         android:id="@+id/checkbox_two"
         android:layout_marginBottom="10dp"
-        android:layout_marginStart="8dp"
-        />
+        android:layout_marginStart="8dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -82,11 +81,11 @@
         android:textSize="16sp"
         android:layout_below="@id/checkbox_two"
         android:layout_marginStart="48dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/textview_border"
         android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        />
+        android:paddingRight="8dp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -96,11 +95,10 @@
         android:layout_toEndOf="@id/tv_day_one"
         android:layout_below="@id/checkbox_two"
         android:layout_marginStart="20dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/textview_border"
         android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        />
+        android:paddingRight="8dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -111,12 +109,9 @@
         android:layout_toEndOf="@id/tv_day_two"
         android:layout_below="@id/checkbox_two"
         android:layout_marginStart="20dp"
-        android:layout_marginBottom="10dp"
         android:background="@drawable/textview_border"
         android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        />
-
+        android:paddingRight="8dp" />
 
 
 </RelativeLayout>

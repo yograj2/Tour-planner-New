@@ -21,16 +21,17 @@ import com.example.yogra.tourplanner.SiteInfo;
 import com.example.yogra.tourplanner.TourPlannerConstant;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private Context context;
-    private ArrayList<Place> tourdetails;
+    private List<Place> tourdetails;
 
     private static final String TAG = "MyAdapter";
     public Intent intent;
 
-    public MyAdapter(Context context, ArrayList<Place> tourdetails) {
+    public MyAdapter(Context context, List<Place> tourdetails) {
         this.context = context;
         this.tourdetails = tourdetails;
     }
@@ -97,6 +98,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public int getItemCount() {
         return tourdetails.size();
+    }
+
+    public void setPlaceCollection(List<Place> collection) {
+        this.tourdetails = collection;
+        notifyDataSetChanged();
+    }
+
+    public void clearCollection() {
+        if (tourdetails != null) {
+            tourdetails.clear();
+            notifyDataSetChanged();
+        }
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {

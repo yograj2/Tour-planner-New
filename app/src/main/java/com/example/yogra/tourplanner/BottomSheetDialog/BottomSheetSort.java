@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.example.yogra.tourplanner.R;
 
-public class BottomSheetDialog extends BottomSheetDialogFragment {
+public class BottomSheetSort extends BottomSheetDialogFragment {
 
     @SuppressLint("RestrictedApi")
     @Override

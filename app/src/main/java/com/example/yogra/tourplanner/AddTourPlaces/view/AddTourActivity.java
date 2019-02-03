@@ -1,8 +1,10 @@
 package com.example.yogra.tourplanner.AddTourPlaces.view;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -20,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.yogra.tourplanner.R;
+import com.example.yogra.tourplanner.SQLiteDatabase.view.DatabaseHelper;
 import com.example.yogra.tourplanner.Util.ImageUtil;
 import com.example.yogra.tourplanner.Util.Place;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -44,6 +47,7 @@ public class AddTourActivity extends Activity {
 
     private int PICK_IMAGE_REQUEST = 1;
     private static final String TAG = "AddTourActivity";
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,7 @@ public class AddTourActivity extends Activity {
         mFloatingActionButton = findViewById(R.id.add_tour_floatingButton);
         mIvPlaceImage = findViewById(R.id.iv_tour_image);
         databaseReference = FirebaseDatabase.getInstance().getReference();
+        context = this;
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,7 +118,20 @@ public class AddTourActivity extends Activity {
                                     Log.d(TAG, "Failed to add in database");
                                 }
                             });
+
+                    /*DatabaseHelper databaseHelper = new DatabaseHelper(context);
+                    Place place1 = new Place();
+                    place1.setTourPlace(tourplace.getText().toString());
+                    place1.setTourDescription(tourdescription.getText().toString());
+                    place1.setSightSeeing(tourseightseing.getText().toString());
+                    place1.setNightCharge(Integer.parseInt(dayNight.getText().toString()));
+                    databaseHelper.insertPlace(place1);*/
+
                 }
+
+/*
+                DatabaseHelper databaseHelper1 = new DatabaseHelper(context);
+*/
 
 
             }
@@ -139,7 +157,10 @@ public class AddTourActivity extends Activity {
                 startActivityForResult(i, PICK_IMAGE_REQUEST);
             }
         });
+
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

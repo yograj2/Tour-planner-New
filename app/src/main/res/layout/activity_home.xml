@@ -2,77 +2,83 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#e6e6e6"
-    android:id="@+id/drawer_layout"
     android:fitsSystemWindows="true"
     tools:context=".Home.HomeActivity">
 
 
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:id="@+id/filter_layout">
-
-       <TextView
-           android:layout_width="match_parent"
-           android:layout_height="50dp"
-           android:id="@+id/tv_sort"
-           android:layout_weight="2"
-           android:text="Sort"
-           android:textSize="16sp"
-           android:drawableStart="@drawable/sort_image"
-           android:gravity="center"
-           android:layout_gravity="center"
-           android:background="@drawable/textview_border"
-           />
-
-       <TextView
-           android:layout_width="match_parent"
-           android:layout_height="50dp"
-           android:layout_weight="2"
-           android:id="@+id/tv_filter"
-           android:text="Filter"
-           android:textSize="16sp"
-           android:drawableStart="@drawable/ic_filter_list_black_24dp"
-           android:gravity="center"
-           android:background="@drawable/textview_border"
-           />
-
-   </LinearLayout>
-    
- <!--<android.support.constraint.ConstraintLayout
+    <LinearLayout
+        android:id="@+id/filter_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/drawer_layout"
-     >-->
+        android:layout_height="wrap_content">
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/Home_button_admin"
+        <TextView
+            android:id="@+id/tv_sort"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/add_icon"
-            app:fabSize="normal"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp" />
+            android:layout_weight="1"
+            android:background="@drawable/textview_border"
+            android:drawableStart="@drawable/sort_image"
+            android:drawablePadding="30dp"
+            android:paddingStart="30dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="10dp"
+            android:text="Sort"
 
-     <android.support.v7.widget.RecyclerView
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         android:id="@+id/recycler_view"
-         android:paddingBottom="6dp"
-         android:clipToPadding="false"
-         android:layout_marginTop="52dp"
-         >
-     </android.support.v7.widget.RecyclerView>
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/textview_border"
+            android:drawableStart="@drawable/ic_filter_list_black_24dp"
+            android:drawablePadding="30dp"
+            android:paddingStart="30dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="10dp"
+            android:text="Filter"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <!--<android.support.constraint.ConstraintLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           app:layout_constraintTop_toBottomOf="@id/drawer_layout"
+        >-->
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/Home_button_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/add_icon"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="52dp"
+        android:clipToPadding="false"
+        android:paddingBottom="6dp">
+
+    </android.support.v7.widget.RecyclerView>
 
 </android.support.constraint.ConstraintLayout>
 
-<!--</android.support.constraint.ConstraintLayout>-->
+    <!--</android.support.constraint.ConstraintLayout>-->
 
     <!--<Button
         android:layout_width="wrap_content"
@@ -87,7 +93,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
         />-->
-
 
 
     <!--<LinearLayout
