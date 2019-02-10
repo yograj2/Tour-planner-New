@@ -2,11 +2,15 @@ package com.example.yogra.tourplanner.Home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,11 +22,12 @@ import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 //import android.widget.Toolbar;
 import com.example.yogra.tourplanner.AddTourPlaces.view.AddTourActivity;
 import com.example.yogra.tourplanner.BaseActivity;
 import com.example.yogra.tourplanner.BottomSheetDialog.BottomSheetSort;
-import com.example.yogra.tourplanner.BottomSheetDialog.BottomSheetFilter;
+//import com.example.yogra.tourplanner.BottomSheetDialog.BottomSheetFilter;
 import com.example.yogra.tourplanner.Login.view.LoginActivity;
 import com.example.yogra.tourplanner.SQLiteDatabase.view.DatabaseHelper;
 import com.example.yogra.tourplanner.TourPlannerConstant;
@@ -37,13 +42,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+
 
 public class HomeActivity extends BaseActivity {
 
     public FloatingActionButton floatingActionButtonAdmin;
     public DatabaseReference databaseReference;
     public RecyclerView recyclerView;
-    private ArrayList<Place> tourdetails;
+    private List<Place> tourdetails;
     private MyAdapter adapter;
     public Button logout;
     //PreferenceHelper mPreference;
@@ -55,18 +65,24 @@ public class HomeActivity extends BaseActivity {
     private static final String TAG = "HomeActivity";
     public TextView sort;
     public TextView filter;
+    public DatabaseHelper databaseHelper;
+    private android.support.v7.widget.Toolbar toolbar;
+    public String currentSortingOrder;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);*/
+        /* toolbar =findViewById(R.id.toolbar);
+         setSupportActionBar(toolbar);
+
+
 
         //drawer Layout
 
-        /*drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout = findViewById(R.id.drawer_layout);
 
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,
                 R.string.navigation_drawer_open,R.string.navigation_drawer_close);
@@ -104,7 +120,9 @@ public class HomeActivity extends BaseActivity {
         }
 
         adapter = new MyAdapter(HomeActivity.this, tourdetails);
+
         recyclerView.setAdapter(adapter);
+
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("TourPlace");
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -124,7 +142,7 @@ public class HomeActivity extends BaseActivity {
                 adapter.setPlaceCollection(tourdetails);
                 //DATABASE HELPER
 
-                DatabaseHelper databaseHelper = new DatabaseHelper(context);
+                databaseHelper = new DatabaseHelper(context);
                 databaseHelper.insertPlaceList(tourdetails);
             }
 
@@ -168,13 +186,26 @@ public class HomeActivity extends BaseActivity {
                 group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
-                        if (checkedId == R.id.rb_low_to_high) {
+                        if (checkedId == R.id.rb_low_to_high)
+                        {
                             adapter.clearCollection();
                             //Need to call database query
                             // order by Night cost ascending
+                            currentSortingOrder=TourPlannerConstant.ORDER_ASC;
+                            tourdetails = databaseHelper.sort(currentSortingOrder);
+                            adapter.setPlaceCollection(tourdetails);
+                            Log.d(TAG,"data in ascending");
+                        }
+                        else
+                            {
+                                adapter.clearCollection();
+                                currentSortingOrder=TourPlannerConstant.ORDER_DESC;
+                                tourdetails = databaseHelper.sort(currentSortingOrder);
+                                adapter.setPlaceCollection(tourdetails);
+                                Log.d(TAG,"data in descending");
 
-                        } else {
-
+               /*             databaseHelper.desc(tourdetails);
+                                adapter.setPlaceCollection(tourdetails);*/
                         }
                     }
                 });
@@ -196,6 +227,8 @@ public class HomeActivity extends BaseActivity {
 
     }
 
+    //Drawer Layout
+
    /* @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -204,6 +237,8 @@ public class HomeActivity extends BaseActivity {
             super.onBackPressed();
         }
     }*/
+
+    //Overflow menu
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

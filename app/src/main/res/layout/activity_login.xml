@@ -4,29 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login.view.LoginActivity"
     android:background="#4FC3F7"
-    >
+    tools:context=".Login.view.LoginActivity">
 
     <ImageView
         android:id="@+id/image1"
         android:layout_width="0dp"
         android:layout_height="240dp"
+        android:alpha="0.8"
         android:scaleType="centerCrop"
         android:src="@drawable/project_imagefive"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:alpha="0.8"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/login_constraint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
         android:background="@drawable/login_field_border"
         app:layout_constraintTop_toBottomOf="@+id/image1">
 
@@ -34,45 +32,43 @@
             android:id="@+id/login_email_id"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:background="@android:color/transparent"
             android:drawableRight="@drawable/ic_email"
-            android:paddingStart="8dp"
-            android:hint="Enter Email Address"
             android:gravity="center"
-            android:textColorHint="#616161"
+            android:hint="Enter Email Address"
+            android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:paddingRight="8dp"
-            />
+            android:textColorHint="#616161"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/password_constraint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="4dp"
         android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
-        android:id="@+id/password_constraint"
-        app:layout_constraintTop_toBottomOf="@id/login_constraint"
-        android:background="@drawable/login_field_border">
+        android:background="@drawable/login_field_border"
+        app:layout_constraintTop_toBottomOf="@id/login_constraint">
 
         <EditText
             android:id="@+id/login_password"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:hint="Enter password"
-            android:inputType="textPassword"
             android:background="@android:color/transparent"
             android:drawableRight="@drawable/password_lock"
-            android:textColorHint="#616161"
             android:gravity="center"
-            android:paddingRight="8dp"
+            android:hint="Enter password"
+            android:inputType="textPassword"
             android:paddingStart="8dp"
             android:paddingLeft="8dp"
-            />
+            android:paddingRight="8dp"
+            android:textColorHint="#616161"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
     <Button
@@ -82,26 +78,26 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/rounded_button"
         android:text="LOGIN"
         android:textColor="#fffff4"
-        android:background="@drawable/rounded_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/password_constraint" />
 
-<Button
-    android:id="@+id/signup_button"
+    <Button
+        android:id="@+id/signup_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/login_button"
-        android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginRight="16dp"
         android:background="@drawable/rounded_button"
         android:text="SIGNUP"
-        android:textColor="#fffff4"/>
+        android:textColor="#fffff4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_button" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -11,4 +11,8 @@ public class TourPlannerConstant {
     public static final String TOUR_PLACE_SIGHTSEEING = "tour_place_sightseeing";
     public static final String TOUR_PLACE_IMAGE = "tour_place_image";
 
+    public static final String ORDER_ASC="ASC";
+    public static final String ORDER_DESC="DESC";
+
+
 }

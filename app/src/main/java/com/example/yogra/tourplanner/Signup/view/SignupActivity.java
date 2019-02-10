@@ -138,7 +138,7 @@ public class SignupActivity extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         Log.d(TAG,"onSuccess :");
-                                        intent = new Intent(SignupActivity.this,HomeActivity.class);
+                                        intent = new Intent(SignupActivity.this,LoginActivity.class);
                                         startActivity(intent);
                                     }
                                 })

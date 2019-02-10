@@ -1,4 +1,4 @@
-package com.example.yogra.tourplanner.BottomSheetDialog;
+/*package com.example.yogra.tourplanner.BottomSheetDialog;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -46,11 +46,11 @@ public class BottomSheetFilter extends BottomSheetDialogFragment
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                 if (isChecked) {
-                    /*for (int i = 0; i < relativeLayout.getChildCount(); i++) {
+                    *//*for (int i = 0; i < relativeLayout.getChildCount(); i++) {
                         View view = relativeLayout.getChildAt(i);
                         view.setVisibility(View.GONE);
 
-                        Log.d(TAG, "Visible");*/
+                        Log.d(TAG, "Visible");*//*
                         textviewOne.setVisibility(View.VISIBLE);
                         textviewTwo.setVisibility(View.VISIBLE);
                         textviewThree.setVisibility(View.VISIBLE);
@@ -59,9 +59,9 @@ public class BottomSheetFilter extends BottomSheetDialogFragment
 
                 else {
 
-                   /* for (int i = 0; i < relativeLayout.getChildCount(); i++) {
+                   *//* for (int i = 0; i < relativeLayout.getChildCount(); i++) {
                         View view = relativeLayout.getChildAt(i);
-                        view.setVisibility(View.VISIBLE);*/
+                        view.setVisibility(View.VISIBLE);*//*
                     textviewOne.setVisibility(View.GONE);
                     textviewTwo.setVisibility(View.GONE);
                     textviewThree.setVisibility(View.GONE);
@@ -97,7 +97,7 @@ public class BottomSheetFilter extends BottomSheetDialogFragment
             }
         });
     }
-}
+}*/
 
 
  //checkBox.setOnClickListener(new View.OnClickListener() {

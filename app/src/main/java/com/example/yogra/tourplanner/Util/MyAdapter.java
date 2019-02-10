@@ -21,6 +21,8 @@ import com.example.yogra.tourplanner.SiteInfo;
 import com.example.yogra.tourplanner.TourPlannerConstant;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -54,7 +56,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         final int randomNum = ThreadLocalRandom.current().nextInt(4, 9 + 1);
         Log.d(TAG, "Random Number : " + randomNum);
         myViewHolder.numberOfNights.setText(String.valueOf(randomNum)+"N /"+(randomNum+1)+"D");
-        myViewHolder.cost.setText(String.valueOf(place.getNightCharge()*randomNum));
+        String n=String.valueOf(place.getNightCharge()*randomNum);
+        //myViewHolder.cost.setText(String.valueOf(place.getNightCharge()*randomNum));
+        myViewHolder.cost.setText(n);
 
         Log.d(TAG, "onBindViewHolder() -> image Data : " + place.getImageData());
         byte[] imageByteArray = Base64.decode(place.getImageData(), Base64.DEFAULT);
@@ -62,6 +66,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 .asBitmap()
                 .load(imageByteArray)
                 .into(myViewHolder.mImagedata);
+
+
+
         myViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

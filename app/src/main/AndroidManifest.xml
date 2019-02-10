@@ -14,9 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Launcher.view.LauncherActivity">
+            android:name=".MainActivity" />
+        <activity android:name=".Launcher.view.LauncherActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +26,8 @@
         </activity>
         <activity android:name=".Login.view.LoginActivity" />
         <activity android:name=".Signup.view.SignupActivity" />
-        <activity android:name=".Home.HomeActivity" />
+        <activity android:name=".Home.HomeActivity"
+            />
         <activity android:name=".AddTourPlaces.view.AddTourActivity" />
         <activity android:name=".SiteInfo" />
         <activity android:name=".Util.Calculation" />

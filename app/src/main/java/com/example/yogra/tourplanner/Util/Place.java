@@ -40,6 +40,7 @@ public class Place {
         return tourPlace;
     }
 
+
     public void setTourPlace(String tourPlace) {
         this.tourPlace = tourPlace;
     }
