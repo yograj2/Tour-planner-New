@@ -19,6 +19,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -221,6 +225,72 @@ public class HomeActivity extends BaseActivity {
                 BottomSheetDialog dialogFilter = new BottomSheetDialog(context);
                 dialogFilter.setContentView(view);
                 dialogFilter.show();
+                final CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkbox_click);
+                final CheckBox checkBoxBudget = (CheckBox) view.findViewById(R.id.checkbox_click_duration);
+                final LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.rd_budget_container);
+                final LinearLayout linearLayoutBudget = (LinearLayout) view.findViewById(R.id.rd_duration_container);
+
+                final RadioButton radioButton1 = (RadioButton) view.findViewById(R.id.rd_one);
+                final RadioButton radioButton2 = (RadioButton) view.findViewById(R.id.rd_two);
+                final RadioButton radioButton3 = (RadioButton) view.findViewById(R.id.rd_three);
+                final RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.rg_budget);
+
+                linearLayout.setVisibility(View.GONE);
+
+                checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked){
+                            linearLayout.setVisibility(View.VISIBLE);
+
+                            radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                                @Override
+                                public void onCheckedChanged(RadioGroup group, int checkedId)
+                                {
+                                    if (checkedId == R.id.rd_one)
+                                    {
+                                        adapter.clearCollection();
+                                        tourdetails=databaseHelper.applyFilter(currentSortingOrder,2000);
+                                        adapter.setPlaceCollection(tourdetails);
+                                    }
+
+                                    else if (checkedId==R.id.rd_two)
+                                    {
+                                        adapter.clearCollection();
+                                        tourdetails=databaseHelper.applyFilter(currentSortingOrder,3000);
+                                        adapter.setPlaceCollection(tourdetails);
+                                    }
+
+                                    else
+                                    {
+                                        adapter.clearCollection();
+                                        tourdetails=databaseHelper.applyFilter(currentSortingOrder,4000);
+                                        adapter.setPlaceCollection(tourdetails);
+                                    }
+                                }
+                            });
+                        }
+                        else {
+                            linearLayout.setVisibility(View.GONE);
+                        }
+                    }
+                });
+
+
+
+                linearLayoutBudget.setVisibility(View.GONE);
+
+                checkBoxBudget.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked){
+                            linearLayoutBudget.setVisibility(View.VISIBLE);
+                        }
+                        else {
+                            linearLayoutBudget.setVisibility(View.GONE);
+                        }
+                    }
+                });
 
             }
         });

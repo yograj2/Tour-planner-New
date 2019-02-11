@@ -11,6 +11,7 @@ import com.example.yogra.tourplanner.Util.Place;
 import com.example.yogra.tourplanner.Util.User;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -25,6 +26,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String PLACE_ID = "place_id";
     public static final String PLACE_IMAGE="place_image";
     public static final String TABLE_NAME = "place";
+
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -107,6 +109,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return placeList;
     }
     //}
+
+
+    public List<Place> applyFilter(String order,int amount){
+
+        List<Place> placeList = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+
+        String query3 =  (" SELECT * FROM " +TABLE_NAME+ " WHERE " +COST_PER_NIGHT + "<" + amount + " ORDER BY " + order);
+        Cursor cursor = sqLiteDatabase.rawQuery(query3,null);
+
+        if (cursor.getCount()>0){
+            while (cursor.moveToNext()){
+                Place place = new Place();
+                place.setId(cursor.getString(cursor.getColumnIndex(PLACE_ID)));
+                place.setTourPlace(cursor.getString(cursor.getColumnIndex(PLACE_NAME)));
+                place.setTourDescription(cursor.getString(cursor.getColumnIndex(PLACE_DESCRIPTION)));
+                place.setSightSeeing(cursor.getString(cursor.getColumnIndex(PLACE_SEIGHTSEEING)));
+                place.setImageData(cursor.getString(cursor.getColumnIndex(PLACE_IMAGE)));
+                place.setNightCharge(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COST_PER_NIGHT))));
+
+                placeList.add(place);
+            }
+        }
+        cursor.close();
+        return placeList;
+    }
+
 
    /* public void desc(List<Place> placeList) {
         //   for (Place place : placeList) {
