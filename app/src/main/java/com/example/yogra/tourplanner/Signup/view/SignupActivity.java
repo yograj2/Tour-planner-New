@@ -13,12 +13,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.yogra.tourplanner.Home.HomeActivity;
 import com.example.yogra.tourplanner.Login.view.LoginActivity;
 import com.example.yogra.tourplanner.R;
 import com.example.yogra.tourplanner.Util.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -61,12 +61,15 @@ public class SignupActivity extends AppCompatActivity {
         conformpassword = findViewById(R.id.ConformPassword);
         button = findViewById(R.id.signup);
         textView = findViewById(R.id.tv_signup_login);
+
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
 
         //progress Bar
 
         progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+
 
        /* public boolean onSupportNavigateUp(){
             finish();
@@ -133,8 +136,15 @@ public class SignupActivity extends AppCompatActivity {
                         String email = emailaddress.getText().toString();
                        // User  user = new User(Username,Email,Password,Conformpassword);
                       //  assert email != null;
-                        databaseReference.child("users").child(email.substring(0, email.indexOf("@"))).setValue(user)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+
+
+
+
+
+                      databaseReference.child("users").child(email.substring(0, email.indexOf("@"))).setValue(user)
+                                .addOnSuccessListener(new OnSuccessListener<Void>()
+                                {
+
                                     @Override
                                     public void onSuccess(Void aVoid) {
                                         Log.d(TAG,"onSuccess :");
@@ -148,7 +158,6 @@ public class SignupActivity extends AppCompatActivity {
                                         Log.d(TAG,"onError" +e.toString());
                                     }
                                 });
-
                     }
                 }
 
@@ -156,6 +165,7 @@ public class SignupActivity extends AppCompatActivity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(SignupActivity.this,LoginActivity.class);
                 startActivity(intent);
             }

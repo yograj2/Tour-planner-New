@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.yogra.tourplanner.TourPlannerConstant;
 import com.example.yogra.tourplanner.Util.Place;
 import com.example.yogra.tourplanner.Util.User;
 
@@ -24,7 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String PLACE_SEIGHTSEEING = "place_seightseeing";
     public static final String COST_PER_NIGHT = "cost_per_night";
     public static final String PLACE_ID = "place_id";
-    public static final String PLACE_IMAGE="place_image";
+    public static final String PLACE_IMAGE = "place_image";
     public static final String TABLE_NAME = "place";
 
 
@@ -37,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         try {
 
-            String query = "create table " + TABLE_NAME + " ( " + PLACE_ID + " BIGINT primary key, " + PLACE_NAME + " text, " + PLACE_DESCRIPTION + " text, " + PLACE_SEIGHTSEEING + " text, " + COST_PER_NIGHT + " Integer , "+PLACE_IMAGE +" text)";
+            String query = "create table " + TABLE_NAME + " ( " + PLACE_ID + " BIGINT primary key, " + PLACE_NAME + " text, " + PLACE_DESCRIPTION + " text, " + PLACE_SEIGHTSEEING + " text, " + COST_PER_NIGHT + " Integer , " + PLACE_IMAGE + " text)";
             db.execSQL(query);
             Log.d(TAG, "Query sucessfully run" + query);
 
@@ -48,19 +49,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-   /* public void insertPlace(Place place) {
-        SQLiteDatabase writableDatabase = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(PLACE_NAME, place.getTourPlace());
-        contentValues.put(PLACE_DESCRIPTION, place.getTourDescription());
-        contentValues.put(PLACE_SEIGHTSEEING, place.getSightSeeing());
-        contentValues.put(COST_PER_NIGHT, place.getNightCharge());
-        contentValues.put(PLACE_ID, place.getId());
-        long data = writableDatabase.insertWithOnConflict(TABLE_NAME, null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);
+    /* public void insertPlace(Place place) {
+         SQLiteDatabase writableDatabase = this.getWritableDatabase();
+         ContentValues contentValues = new ContentValues();
+         contentValues.put(PLACE_NAME, place.getTourPlace());
+         contentValues.put(PLACE_DESCRIPTION, place.getTourDescription());
+         contentValues.put(PLACE_SEIGHTSEEING, place.getSightSeeing());
+         contentValues.put(COST_PER_NIGHT, place.getNightCharge());
+         contentValues.put(PLACE_ID, place.getId());
+         long data = writableDatabase.insertWithOnConflict(TABLE_NAME, null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);
 
-        Log.d(TAG, "wriatable data prited" + data);
-    }
-*/
+         Log.d(TAG, "wriatable data prited" + data);
+     }
+ */
     public void insertPlaceList(List<Place> placeList) {
         SQLiteDatabase writableDatabase = this.getWritableDatabase();
         for (Place place : placeList) {
@@ -70,38 +71,48 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             contentValues.put(PLACE_DESCRIPTION, place.getTourDescription());
             contentValues.put(PLACE_SEIGHTSEEING, place.getSightSeeing());
             contentValues.put(COST_PER_NIGHT, place.getNightCharge());
-            contentValues.put(PLACE_IMAGE,place.getImageData());
-            writableDatabase.insertWithOnConflict(TABLE_NAME, null, contentValues,SQLiteDatabase.CONFLICT_IGNORE);
+            contentValues.put(PLACE_IMAGE, place.getImageData());
+            writableDatabase.insertWithOnConflict(TABLE_NAME, null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);
         }
     }
 
-    public List<Place> sort(String orderBy) {
+    public List<Place> sort(String orderBy, int budget) {
         List<Place> placeList = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        //for (Place place : placeList) {
 
-        String query1 = ("SELECT * FROM " + TABLE_NAME + " ORDER BY " + COST_PER_NIGHT + " " + orderBy);
+        String queryFilter = null;
+
+        if (budget != 0) {
+            Log.d(TAG,"Budget addd" +budget);
+            queryFilter = " SELECT * FROM " + TABLE_NAME + " WHERE " + COST_PER_NIGHT + "<" + budget + " ORDER BY " + COST_PER_NIGHT + " " + orderBy;
+        } else {
+            queryFilter = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + COST_PER_NIGHT + " " + orderBy;
+
+        }
 
 
-        Cursor cursor = sqLiteDatabase.rawQuery(query1, null);
-
+       // String query1 = ("SELECT * FROM " + TABLE_NAME + " ORDER BY " + COST_PER_NIGHT + " " + orderBy);
+        Log.d(TAG, "sort: " + queryFilter);
+        Cursor cursor = sqLiteDatabase.rawQuery(queryFilter, null);
         int count = cursor.getCount();
         Log.d(TAG, "cursor count " + count);
-       // Log.d(TAG, "orderby query "+query1);
+        // Log.d(TAG, "orderby query "+query1);
 
         if (cursor.getCount() > 0) {
-           while (cursor.moveToNext()) {
-               Place place  = new Place();
-               Log.d(TAG,"Place Id " +cursor.getString(cursor.getColumnIndex(PLACE_ID)));
-               place.setId(cursor.getString(cursor.getColumnIndex(PLACE_ID)));
-               place.setTourPlace(cursor.getString(cursor.getColumnIndex(PLACE_NAME)));
-               place.setTourDescription(cursor.getString(cursor.getColumnIndex(PLACE_DESCRIPTION)));
-               place.setSightSeeing(cursor.getString(cursor.getColumnIndex(PLACE_SEIGHTSEEING)));
-               place.setImageData(cursor.getString(cursor.getColumnIndex(PLACE_IMAGE)));
-               place.setNightCharge(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COST_PER_NIGHT))));
+            while (cursor.moveToNext()) {
+                Place place = new Place();
+                //          Log.d(TAG,"Place Id " +cursor.getString(cursor.getColumnIndex(PLACE_ID)));
+                place.setId(cursor.getString(cursor.getColumnIndex(PLACE_ID)));
+                place.setTourPlace(cursor.getString(cursor.getColumnIndex(PLACE_NAME)));
+                place.setTourDescription(cursor.getString(cursor.getColumnIndex(PLACE_DESCRIPTION)));
+                place.setSightSeeing(cursor.getString(cursor.getColumnIndex(PLACE_SEIGHTSEEING)));
+                place.setImageData(cursor.getString(cursor.getColumnIndex(PLACE_IMAGE)));
+                place.setNightCharge(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COST_PER_NIGHT))));
 
-               placeList.add(place);
-           }
+                placeList.add(place);
+
+            }
+
         }
 
         cursor.close();
@@ -111,28 +122,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //}
 
 
-    public List<Place> applyFilter(String order,int amount){
+    public List<Place> applyFilter(String order, int amount) {
 
         List<Place> placeList = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String query = null;
+        if (order != null) {
+            query = " SELECT * FROM " + TABLE_NAME + " WHERE " + COST_PER_NIGHT + "<" + amount + " ORDER BY " + COST_PER_NIGHT + " " + order;
+        } else {
+            query = " SELECT * FROM " + TABLE_NAME + " WHERE " + COST_PER_NIGHT + "<" + amount;
+        }
+        Cursor cursorApplyFilter = sqLiteDatabase.rawQuery(query, null);
 
-        String query3 =  (" SELECT * FROM " +TABLE_NAME+ " WHERE " +COST_PER_NIGHT + "<" + amount + " ORDER BY " + order);
-        Cursor cursor = sqLiteDatabase.rawQuery(query3,null);
-
-        if (cursor.getCount()>0){
-            while (cursor.moveToNext()){
+        if (cursorApplyFilter.getCount() > 0) {
+            while (cursorApplyFilter.moveToNext()) {
                 Place place = new Place();
-                place.setId(cursor.getString(cursor.getColumnIndex(PLACE_ID)));
-                place.setTourPlace(cursor.getString(cursor.getColumnIndex(PLACE_NAME)));
-                place.setTourDescription(cursor.getString(cursor.getColumnIndex(PLACE_DESCRIPTION)));
-                place.setSightSeeing(cursor.getString(cursor.getColumnIndex(PLACE_SEIGHTSEEING)));
-                place.setImageData(cursor.getString(cursor.getColumnIndex(PLACE_IMAGE)));
-                place.setNightCharge(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COST_PER_NIGHT))));
+                place.setId(cursorApplyFilter.getString(cursorApplyFilter.getColumnIndex(PLACE_ID)));
+                place.setTourPlace(cursorApplyFilter.getString(cursorApplyFilter.getColumnIndex(PLACE_NAME)));
+                place.setTourDescription(cursorApplyFilter.getString(cursorApplyFilter.getColumnIndex(PLACE_DESCRIPTION)));
+                place.setSightSeeing(cursorApplyFilter.getString(cursorApplyFilter.getColumnIndex(PLACE_SEIGHTSEEING)));
+                place.setImageData(cursorApplyFilter.getString(cursorApplyFilter.getColumnIndex(PLACE_IMAGE)));
+                place.setNightCharge(Integer.parseInt(cursorApplyFilter.getString(cursorApplyFilter.getColumnIndex(COST_PER_NIGHT))));
 
                 placeList.add(place);
             }
         }
-        cursor.close();
+
+        cursorApplyFilter.close();
         return placeList;
     }
 

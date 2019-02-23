@@ -14,5 +14,7 @@ public class TourPlannerConstant {
     public static final String ORDER_ASC="ASC";
     public static final String ORDER_DESC="DESC";
 
-
+    public static final int BUDGET_FILTER_ONE = 2000;
+    public static final int BUDGET_FILTER_TWO = 3000;
+    public static final int BUDGET_FILTER_THREE = 4000;
 }

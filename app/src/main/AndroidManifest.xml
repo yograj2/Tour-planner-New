@@ -31,7 +31,6 @@
         <activity android:name=".AddTourPlaces.view.AddTourActivity" />
         <activity android:name=".SiteInfo" />
         <activity android:name=".Util.Calculation" />
-        <activity android:name=".BottomSheetDialog.view.BottomSheetDialog"></activity>
     </application>
 
 </manifest>

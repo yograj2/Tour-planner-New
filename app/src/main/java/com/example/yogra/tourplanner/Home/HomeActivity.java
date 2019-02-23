@@ -2,15 +2,11 @@ package com.example.yogra.tourplanner.Home;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,11 +22,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 //import android.widget.Toolbar;
 import com.example.yogra.tourplanner.AddTourPlaces.view.AddTourActivity;
 import com.example.yogra.tourplanner.BaseActivity;
-import com.example.yogra.tourplanner.BottomSheetDialog.BottomSheetSort;
+//import com.example.yogra.tourplanner.BottomSheetDialog.BottomSheetSort;
 //import com.example.yogra.tourplanner.BottomSheetDialog.BottomSheetFilter;
 import com.example.yogra.tourplanner.Login.view.LoginActivity;
 import com.example.yogra.tourplanner.SQLiteDatabase.view.DatabaseHelper;
@@ -46,10 +41,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-
 
 
 public class HomeActivity extends BaseActivity {
@@ -72,7 +64,16 @@ public class HomeActivity extends BaseActivity {
     public DatabaseHelper databaseHelper;
     private android.support.v7.widget.Toolbar toolbar;
     public String currentSortingOrder;
-
+    String budgetOne;
+    String budgetTwo;
+    String budgetThree;
+    public boolean mBudgetFilterSelected;
+    public boolean mBudgetSortSelected;
+    public boolean mDurationSelected;
+    public int mSelectedBudgetId = -1;
+    public int mSelectedSortId = -1;
+    public int mSelectedDurationId = -1;
+    public int mSelectedBudget = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,6 +176,10 @@ public class HomeActivity extends BaseActivity {
             }
         });
 
+        /*budgetOne=TourPlannerConstant.BUDGET_FILTER_ONE;
+        budgetTwo=TourPlannerConstant.BUDGET_FILTER_TWO;
+        budgetThree=TourPlannerConstant.BUDGET_FILTER_THREE;*/
+
         //Bottom Sheet Dialog
 
         sort.setOnClickListener(new View.OnClickListener() {
@@ -186,27 +191,36 @@ public class HomeActivity extends BaseActivity {
                 BottomSheetDialog dialog = new BottomSheetDialog(context);
                 dialog.setContentView(view);
                 dialog.show();
-                RadioGroup group = view.findViewById(R.id.radio_group_sort);
-                group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+                RadioGroup radioGroupSort = view.findViewById(R.id.radio_group_sort);
+
+                if (mSelectedSortId != -1){
+                    radioGroupSort.check(mSelectedSortId);
+                }
+
+                radioGroupSort.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(RadioGroup group, int checkedId) {
-                        if (checkedId == R.id.rb_low_to_high)
-                        {
+                        mBudgetSortSelected = true;
+                        mSelectedSortId = checkedId;
+                        if (checkedId == R.id.rb_low_to_high) {
                             adapter.clearCollection();
                             //Need to call database query
                             // order by Night cost ascending
-                            currentSortingOrder=TourPlannerConstant.ORDER_ASC;
-                            tourdetails = databaseHelper.sort(currentSortingOrder);
+                            currentSortingOrder = TourPlannerConstant.ORDER_ASC;
+                            tourdetails = databaseHelper.sort(currentSortingOrder,mSelectedBudget);
                             adapter.setPlaceCollection(tourdetails);
-                            Log.d(TAG,"data in ascending");
+                            Log.d(TAG, "data in ascending");
                         }
-                        else
-                            {
-                                adapter.clearCollection();
-                                currentSortingOrder=TourPlannerConstant.ORDER_DESC;
-                                tourdetails = databaseHelper.sort(currentSortingOrder);
-                                adapter.setPlaceCollection(tourdetails);
-                                Log.d(TAG,"data in descending");
+                        else {
+
+                            adapter.clearCollection();
+                            currentSortingOrder = TourPlannerConstant.ORDER_DESC;
+                            tourdetails = databaseHelper.sort(currentSortingOrder,mSelectedBudget);
+                            adapter.setPlaceCollection(tourdetails);
+                            Log.d(TAG, "data in descending");
+                            mBudgetSortSelected = false;
+                            mSelectedSortId = -1;
 
                /*             databaseHelper.desc(tourdetails);
                                 adapter.setPlaceCollection(tourdetails);*/
@@ -221,74 +235,108 @@ public class HomeActivity extends BaseActivity {
             public void onClick(View v) {
                 /*BottomSheetFilter bottomSheetFilter = new BottomSheetFilter();
                 bottomSheetFilter.show(getSupportFragmentManager(), bottomSheetFilter.getTag());*/
-                View view = getLayoutInflater().inflate(R.layout.bottom_sheet_filter,null ,false);
+                View view = getLayoutInflater().inflate(R.layout.bottom_sheet_filter, null, false);
                 BottomSheetDialog dialogFilter = new BottomSheetDialog(context);
                 dialogFilter.setContentView(view);
                 dialogFilter.show();
                 final CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkbox_click);
-                final CheckBox checkBoxBudget = (CheckBox) view.findViewById(R.id.checkbox_click_duration);
+                final CheckBox checkBoxDuration = (CheckBox) view.findViewById(R.id.checkbox_click_duration);
                 final LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.rd_budget_container);
                 final LinearLayout linearLayoutBudget = (LinearLayout) view.findViewById(R.id.rd_duration_container);
 
-                final RadioButton radioButton1 = (RadioButton) view.findViewById(R.id.rd_one);
-                final RadioButton radioButton2 = (RadioButton) view.findViewById(R.id.rd_two);
-                final RadioButton radioButton3 = (RadioButton) view.findViewById(R.id.rd_three);
-                final RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.rg_budget);
+                final RadioButton radioButton1 = (RadioButton) view.findViewById(R.id.rd_budget_2000);
+                final RadioButton radioButton2 = (RadioButton) view.findViewById(R.id.rd_budget_3000);
+                final RadioButton radioButton3 = (RadioButton) view.findViewById(R.id.rd_budget_4000);
+                final RadioGroup radioGroupBudget = (RadioGroup) view.findViewById(R.id.rg_budget);
+                final RadioGroup radioGroupDuration = (RadioGroup) view.findViewById(R.id.rg_duration);
 
-                linearLayout.setVisibility(View.GONE);
+                radioGroupBudget.setVisibility(View.GONE);
+                checkBox.setChecked(mBudgetFilterSelected);
+                if (mBudgetFilterSelected) {
+                    radioGroupBudget.setVisibility(View.VISIBLE);
+                }
+                if (mSelectedBudgetId != -1) {
+                    radioGroupBudget.check(mSelectedBudgetId);
+                }
 
                 checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked){
-                            linearLayout.setVisibility(View.VISIBLE);
-
-                            radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                                @Override
-                                public void onCheckedChanged(RadioGroup group, int checkedId)
-                                {
-                                    if (checkedId == R.id.rd_one)
-                                    {
-                                        adapter.clearCollection();
-                                        tourdetails=databaseHelper.applyFilter(currentSortingOrder,2000);
-                                        adapter.setPlaceCollection(tourdetails);
-                                    }
-
-                                    else if (checkedId==R.id.rd_two)
-                                    {
-                                        adapter.clearCollection();
-                                        tourdetails=databaseHelper.applyFilter(currentSortingOrder,3000);
-                                        adapter.setPlaceCollection(tourdetails);
-                                    }
-
-                                    else
-                                    {
-                                        adapter.clearCollection();
-                                        tourdetails=databaseHelper.applyFilter(currentSortingOrder,4000);
-                                        adapter.setPlaceCollection(tourdetails);
-                                    }
-                                }
-                            });
-                        }
-                        else {
+                        if (isChecked) {
+                            radioGroupBudget.setVisibility(View.VISIBLE);
+                        } else {
                             linearLayout.setVisibility(View.GONE);
+                            mBudgetFilterSelected = false;
+                            mSelectedBudgetId = -1;
+                            radioGroupBudget.clearCheck();
                         }
                     }
                 });
 
 
+                radioGroupBudget.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        mBudgetFilterSelected = true;
+                        mSelectedBudgetId = checkedId;
+                        if (checkedId == R.id.rd_budget_2000) {
+                            mSelectedBudget = TourPlannerConstant.BUDGET_FILTER_ONE;
+                        } else if (checkedId == R.id.rd_budget_3000) {
+                            mSelectedBudget = TourPlannerConstant.BUDGET_FILTER_TWO;
+                        } else {
+                            mSelectedBudget = TourPlannerConstant.BUDGET_FILTER_THREE;
+                        }
+                        adapter.clearCollection();
+                        tourdetails = databaseHelper.applyFilter(currentSortingOrder, mSelectedBudget);
+                        adapter.setPlaceCollection(tourdetails);
+                    }
+                });
 
-                linearLayoutBudget.setVisibility(View.GONE);
 
-                checkBoxBudget.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                radioGroupDuration.setVisibility(View.GONE);
+
+                if (mSelectedDurationId != -1){
+                    radioGroupDuration.check(mSelectedDurationId);
+                }
+
+                checkBoxDuration.setChecked(mDurationSelected);
+                if(mDurationSelected){
+                    radioGroupDuration.setVisibility(View.VISIBLE);
+                }
+
+                checkBoxDuration.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked){
-                            linearLayoutBudget.setVisibility(View.VISIBLE);
+                        if (isChecked) {
+                            radioGroupDuration.setVisibility(View.VISIBLE);
+                        } else {
+                            adapter.updateNumberOfNights(5);
+                            radioGroupDuration.setVisibility(View.GONE);
+                            mDurationSelected = false;
+                            mSelectedDurationId = -1;
                         }
-                        else {
-                            linearLayoutBudget.setVisibility(View.GONE);
+                    }
+                });
+
+                radioGroupDuration.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        mDurationSelected = true;
+                        mSelectedDurationId = checkedId;
+                        int numberOfNights = 0;
+                        switch (checkedId) {
+                            case R.id.rd_duration_3days:
+                                numberOfNights = 3;
+                                break;
+                            case R.id.rd_duration_5days:
+                                numberOfNights = 5;
+                                break;
+                            case R.id.rd_duration_week:
+                                numberOfNights = 7;
+                                break;
                         }
+
+                        adapter.updateNumberOfNights(numberOfNights);
                     }
                 });
 

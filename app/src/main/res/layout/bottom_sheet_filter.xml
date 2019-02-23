@@ -35,7 +35,7 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/rd_one"
+                android:id="@+id/rd_budget_2000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="35dp"
@@ -46,7 +46,7 @@
                 />
 
             <RadioButton
-                android:id="@+id/rd_two"
+                android:id="@+id/rd_budget_3000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -56,7 +56,7 @@
                 android:textSize="16dp" />
 
             <RadioButton
-                android:id="@+id/rd_three"
+                android:id="@+id/rd_budget_4000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -110,7 +110,7 @@
             >
 
             <RadioButton
-                android:id="@+id/rd_duration_one"
+                android:id="@+id/rd_duration_3days"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="35dp"
@@ -121,7 +121,7 @@
                 />
 
             <RadioButton
-                android:id="@+id/rd_duration_two"
+                android:id="@+id/rd_duration_5days"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -131,7 +131,7 @@
                 android:textSize="16dp" />
 
             <RadioButton
-                android:id="@+id/rd_duration_three"
+                android:id="@+id/rd_duration_week"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
