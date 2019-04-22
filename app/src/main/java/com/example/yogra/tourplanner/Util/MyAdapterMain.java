@@ -50,7 +50,7 @@ public class MyAdapterMain extends RecyclerView.Adapter<MyAdapterMain.MyViewHold
 
             tourplace = itemView.findViewById(R.id.tv_place_recycler_view_main);
             tourdescription =  itemView.findViewById(R.id.tv_description_recycler_view_main);
-            tourseightseeing = itemView.findViewById(R.id.tv_sightseeing_recycler_view_main);
+           // tourseightseeing = itemView.findViewById(R.id.tv_sightseeing_recycler_view_main);
         }
     }
 }

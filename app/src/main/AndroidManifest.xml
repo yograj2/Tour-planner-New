@@ -29,7 +29,10 @@
         <activity android:name=".Home.HomeActivity"
             />
         <activity android:name=".AddTourPlaces.view.AddTourActivity" />
-        <activity android:name=".SiteInfo" />
+        <activity android:name=".SiteInfo"
+            android:theme="@style/AppThemeOne"
+
+            />
         <activity android:name=".Util.Calculation" />
     </application>
 
