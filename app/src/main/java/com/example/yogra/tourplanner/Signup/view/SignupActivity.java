@@ -85,10 +85,10 @@ public class SignupActivity extends AppCompatActivity {
                     String Conformpassword = conformpassword.getText().toString();
 
                     if(Username.isEmpty()){
-                        Toast.makeText(SignupActivity.this,"User Name should be not empty",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignupActivity.this,"User Name should not be empty",Toast.LENGTH_SHORT).show();
                     }
                     else if (Email.isEmpty()){
-                        Toast.makeText(SignupActivity.this, "Email Id should be not empty", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignupActivity.this, "Email Id should not be empty", Toast.LENGTH_SHORT).show();
                     }
                     else if (Password.isEmpty()){
                         Toast.makeText(SignupActivity.this,"Password should not be empty",Toast.LENGTH_SHORT).show();
@@ -97,7 +97,7 @@ public class SignupActivity extends AppCompatActivity {
                         Toast.makeText(SignupActivity.this,"Conform password should not be empty",Toast.LENGTH_SHORT).show();
                     }
                     else if (!Password.equals(Conformpassword)){
-                        Toast.makeText(SignupActivity.this,"Password should  not same",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignupActivity.this,"Password should not same",Toast.LENGTH_SHORT).show();
                     }
                     else{
 

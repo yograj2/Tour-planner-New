@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.yogra.tourplanner.BaseActivity;
@@ -30,6 +31,7 @@ public class LoginActivity extends BaseActivity {
     public Button login;
     public EditText loginemailid;
     public EditText loginpassword;
+    public TextView dontAccount;
 
     public DatabaseReference mdatabaseReference;
     public ProgressDialog progressDialog;
@@ -51,6 +53,7 @@ public class LoginActivity extends BaseActivity {
         loginpassword = findViewById(R.id.login_password);
         login = findViewById(R.id.login_button);
         signup = findViewById(R.id.signup_button);
+        dontAccount = findViewById(R.id.dont_account);
         //floatingActionButton=findViewById(R.id.Home_button_admin);
         context=this;
 
@@ -159,7 +162,7 @@ public class LoginActivity extends BaseActivity {
             }
         });
 
-        signup.setOnClickListener(new View.OnClickListener() {
+        dontAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 intent = new Intent(LoginActivity.this,SignupActivity.class);
@@ -173,3 +176,4 @@ public class LoginActivity extends BaseActivity {
 
     }
 }
+

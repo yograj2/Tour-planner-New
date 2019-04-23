@@ -4,9 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4FC3F7"
-    tools:context=".Signup.view.SignupActivity">
+    android:background="@drawable/sign_upei"
+    tools:context=".Signup.view.SignupActivity"
 
+    >
+
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:id="@+id/logo_signup"
+        android:src="@drawable/tour_logo"
+        android:scaleType="fitStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
     <TextView
         android:id="@+id/WelcomeOne"
@@ -19,7 +31,9 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
+        />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/Name"
@@ -29,7 +43,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginRight="16dp"
         android:background="@drawable/login_field_border"
-        app:layout_constraintTop_toBottomOf="@id/WelcomeOne">
+        app:layout_constraintTop_toBottomOf="@id/logo_signup">
 
         <EditText
             android:id="@+id/Username"
@@ -133,10 +147,10 @@
         android:id="@+id/tv_signup_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="25dp"
         android:text="Already have an account?? Login "
         android:textColor="#212121"
-        android:textSize="15dp"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/signup" />

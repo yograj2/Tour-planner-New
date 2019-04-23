@@ -16,7 +16,6 @@
         <activity
             android:name=".MainActivity" />
         <activity android:name=".Launcher.view.LauncherActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,6 +30,7 @@
         <activity android:name=".AddTourPlaces.view.AddTourActivity" />
         <activity android:name=".SiteInfo"
             android:theme="@style/AppThemeOne"
+
 
             />
         <activity android:name=".Util.Calculation" />

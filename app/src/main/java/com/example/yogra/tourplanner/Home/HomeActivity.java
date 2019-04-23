@@ -80,6 +80,11 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+
+       /* toolbar = findViewById(R.id.toolbar_actionbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Home Page");*/
+
         /* toolbar =findViewById(R.id.toolbar);
          setSupportActionBar(toolbar);
 

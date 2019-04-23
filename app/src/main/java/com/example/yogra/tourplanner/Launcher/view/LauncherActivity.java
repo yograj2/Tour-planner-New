@@ -3,6 +3,7 @@ package com.example.yogra.tourplanner.Launcher.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toolbar;
 
 import com.example.yogra.tourplanner.BaseActivity;
 import com.example.yogra.tourplanner.Home.HomeActivity;
@@ -18,11 +19,19 @@ public class LauncherActivity extends BaseActivity {
     Timer timer;
     public static boolean value;
     private static final String TAG = "LauncherActivity";
+   // Toolbar toolbar;
+    private android.support.v7.widget.Toolbar toolbar;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
+
+        /*toolbar = findViewById(R.id.toolbar_actionbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Launcher");*/
 
         timer = new Timer();
         timer.schedule(new TimerTask() {
