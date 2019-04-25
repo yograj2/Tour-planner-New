@@ -1,6 +1,8 @@
 package com.example.yogra.tourplanner.Home;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetDialog;
@@ -384,4 +386,25 @@ public class HomeActivity extends BaseActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder ;
+
+        builder = new AlertDialog.Builder(this);
+
+        builder.setMessage("Do you want to close this appliaction");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+               dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
 }
